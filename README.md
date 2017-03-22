@@ -17,3 +17,9 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
+# 引入框架
+- ui museui
+- css normalize
+
+> 需要全局引入的时候放在main.js 打包，main.js是webpack打包的入口。
+

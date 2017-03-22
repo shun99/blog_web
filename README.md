@@ -23,3 +23,11 @@ npm run build --report
 
 > 需要全局引入的时候放在main.js 打包，main.js是webpack打包的入口。
 
+# 搭建主页
+- 引入stylus
+- 搭建主页
+```
+ <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,
+        maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+```

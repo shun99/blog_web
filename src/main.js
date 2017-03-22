@@ -3,9 +3,10 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
-import 'normalize.css';
 import MuseUI from 'muse-ui';
 import 'muse-ui/dist/muse-ui.css';
+import './assets/stylus/index.styl';
+
 Vue.use(MuseUI);
 
 Vue.config.productionTip = false;

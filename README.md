@@ -67,3 +67,6 @@ apiRoutes.get('/makedown', function (req, res) {
   });
 })
 ```
+# 重构首页
+- 提取toolbar
+- 引入better-scroll

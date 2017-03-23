@@ -23,6 +23,7 @@ var proxyTable = config.dev.proxyTable
 var app = express()
 var appData = require('../data.json')
 var seller = appData.seller
+var ratings = appData.ratings
 var fs = require('fs');
 var path = require('path');
 
@@ -43,6 +44,13 @@ apiRoutes.get('/seller', function (req, res) {
   res.json({
     errNo: 0,
     data: seller
+  });
+})
+
+apiRoutes.get('/ratings', function (req, res) {
+  res.json({
+    errNo: 0,
+    data: ratings
   });
 })
 

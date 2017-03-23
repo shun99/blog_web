@@ -73,3 +73,6 @@ apiRoutes.get('/makedown', function (req, res) {
 
 # 列表页加载更多
 > 计算当数据的高度，监听BScroll的滚动，当滚动到合适位置加载更多。
+
+# 点击条目
+传递整个点击的条目信息

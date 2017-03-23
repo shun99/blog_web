@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app-vue">
     <ToolBar :owner="owner" :menuItemList="menuItemList" @pageType="pageType"></ToolBar>
-    <router-view class="app-content-wrapper"></router-view>
+    <router-view class="app-content-wrapper" @clickItem="openArticle"></router-view>
   </div>
 </template>
 
@@ -24,6 +24,9 @@
     methods: {
       pageType (type) {
         console.log(type);
+      },
+      openArticle (item) {
+        console.log(item);
       }
     }
   };

@@ -1,7 +1,7 @@
 <template>
   <div class="list-vue" ref="listWrapper">
     <ul>
-      <li class="item-wrapper border-1px" v-for="(item, index) in itemList">
+      <li class="item-wrapper border-1px" v-for="(item, index) in itemList" ref="itemWrapper">
         <div class="title-wrapper"><a class="title-1">百度{{index}}</a></div>
         <div class="content-wrapper"><p class="content-1">内容</p></div>
         <div class="time-wrapper"><span class="time-1">2016.10.21</span></div>
@@ -13,28 +13,73 @@
 
 
 <script type="text/ecmascript-6">
-  import Scroll from 'better-scroll';
+  import BScroll from 'better-scroll';
 
   export default {
     data () {
       return {
-        itemList: {
-          type: Array,
-          default: []
-        }
+        itemList: [],
+        loadMoreHeight: 0,
+        scrollY: 0,
+        loading: false,
+        curPage: 0
       };
     },
     created () {
-      this.$http.get('/api/ratings').then(response => {
-        this.itemList = response.body.data;
-        this.$nextTick(() => {
-          this._initScroll();
-        });
-      });
+      this.loading = false;
+      this.curPage = 0;
+      this.loadData();
     },
+    computer: {},
     methods: {
+      loadData () {
+        console.log(this.curPage);
+        if (this.curPage > 3 || this.loading) {
+          this.loading = true;
+          return;
+        }
+        this.curPage++;
+        this.loading = true;
+        this.$http.get('/api/ratings').then(response => {
+          console.log(this.itemList.length);
+          response.body.data.forEach((rating) => {
+            this.itemList.push(rating);
+          });
+          console.log(this.itemList.length);
+          this.$nextTick(() => {
+            this._initScroll();
+            this._calculateHeight();
+            this.loading = false;
+          });
+        });
+      },
       _initScroll () {
-        this.scroll = new Scroll(this.$refs.listWrapper);
+        if (!this.scroll) {
+          this.scroll = new BScroll(this.$refs.listWrapper, {
+            click: true,
+            probeType: 3
+          });
+        } else {
+          this.scroll.refresh();
+        }
+        this.scroll.on('scroll', (pos) => {
+          if (this.loading) {
+            return;
+          }
+          this.scrollY = Math.abs(Math.round(pos.y));
+          if (this.scrollY > 0 && this.loadMoreHeight > 0 && this.loadMoreHeight - this.scrollY < 100) {
+            this.loadData();
+          }
+        });
+      },
+      _calculateHeight () {
+        let itemList = this.$refs.itemWrapper;
+        let itemListHeight = 0;
+        for (let i = 0; i < itemList.length; i++) {
+          itemListHeight += itemList[i].clientHeight;
+        }
+        this.loadMoreHeight = itemListHeight - this.$refs.listWrapper.clientHeight;
+        console.log(this.loadMoreHeight);
       }
     }
   };

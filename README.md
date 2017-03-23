@@ -70,3 +70,6 @@ apiRoutes.get('/makedown', function (req, res) {
 # 重构首页
 - 提取toolbar
 - 引入better-scroll
+
+# 列表页加载更多
+> 计算当数据的高度，监听BScroll的滚动，当滚动到合适位置加载更多。

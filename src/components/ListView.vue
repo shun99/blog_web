@@ -15,7 +15,6 @@
   </div>
 </template>
 
-
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll';
 
@@ -29,12 +28,14 @@
         curPage: 0
       };
     },
+    props: {
+      api: ''
+    },
     created () {
       this.loading = false;
       this.curPage = 0;
       this.loadData();
     },
-    computer: {},
     methods: {
       loadData () {
         console.log(this.curPage);
@@ -44,7 +45,7 @@
         }
         this.curPage++;
         this.loading = true;
-        this.$http.get('/api/ratings').then(response => {
+        this.$http.get(this.api).then(response => {
           console.log(this.itemList.length);
           response.body.data.forEach((rating) => {
             this.itemList.push(rating);
@@ -96,6 +97,11 @@
   @import "../assets/stylus/mixin.styl"
 
   .list-vue
+    position: absolute
+    top: 0px
+    left: 0px
+    bottom: 0px
+    right: 0px
     overflow: hidden
     .item-wrapper
       margin 0px 20px

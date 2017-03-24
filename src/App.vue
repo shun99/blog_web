@@ -2,7 +2,7 @@
   <div id="app" class="app-vue">
     <ToolBar :owner="owner" :menuItemList="menuItemList" @pageType="pageType"></ToolBar>
     <keep-alive>
-      <router-view class="app-content-wrapper" @clickItem="openArticle"></router-view>
+      <router-view class="app-content-wrapper"></router-view>
     </keep-alive>
   </div>
 </template>

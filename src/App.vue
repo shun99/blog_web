@@ -36,7 +36,6 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   @import "./assets/stylus/mixin.styl";
-
   .app-vue
     font-size: 0px
     .app-content-wrapper

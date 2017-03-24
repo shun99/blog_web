@@ -6,6 +6,7 @@ import Web from '@/components/Web';
 import Node from '@/components/Node';
 import Article from '@/components/Article';
 import About from '@/components/About';
+import Editor from '@/components/Editor';
 
 Vue.use(Router);
 
@@ -32,12 +33,16 @@ export default new Router({
       component: Node
     },
     {
-      path: '/About',
-      component: About
-    },
-    {
       path: '/article/:id',
       component: Article
+    },
+    {
+      path: '/About',
+      component: Editor
+    },
+    {
+      path: '/About1',
+      component: About
     }
 
   ]

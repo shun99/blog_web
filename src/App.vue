@@ -1,7 +1,9 @@
 <template>
   <div id="app" class="app-vue">
     <ToolBar :owner="owner" :menuItemList="menuItemList" @pageType="pageType"></ToolBar>
-    <router-view class="app-content-wrapper" @clickItem="openArticle"></router-view>
+    <keep-alive>
+      <router-view class="app-content-wrapper" @clickItem="openArticle"></router-view>
+    </keep-alive>
   </div>
 </template>
 
@@ -15,7 +17,7 @@
         owner: {
           name: '一个很严肃的人'
         },
-        menuItemList: ['首页', 'Android', 'Web', 'Node', '关于']
+        menuItemList: ['Home', 'Android', 'Web', 'Node', 'About']
       };
     },
     components: {

@@ -1,6 +1,9 @@
 <template>
   <div class="article-vue">
-    <div v-html="compiledMarkdown"></div>
+    <div class="where">{{$route.params.id}}</div>
+    <div>
+      <div v-html="compiledMarkdown"></div>
+    </div>
   </div>
 </template>
 
@@ -36,5 +39,8 @@
     font-size: 14px
     padding: 0 20px
     code
+      color: #f66
+    .where
+      font-size: 14px
       color: #f66
 </style>

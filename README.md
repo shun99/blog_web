@@ -76,3 +76,11 @@ apiRoutes.get('/makedown', function (req, res) {
 
 # 点击条目
 传递整个点击的条目信息
+
+# SPA问题
+- 动态绑定router-link
+```
+<router-link class="title-1" :to="'/article/' + index">百度{{index}}</router-link>
+```
+- 前进返回
+默认的vue-router会自动处理

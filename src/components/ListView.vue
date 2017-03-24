@@ -2,8 +2,12 @@
   <div class="list-vue" ref="listWrapper">
     <ul>
       <li class="item-wrapper border-1px" v-for="(item, index) in itemList" ref="itemWrapper">
-        <div class="title-wrapper"><a class="title-1" @click="clickItem(item)">百度{{index}}</a></div>
-        <div class="content-wrapper"><p class="content-1">内容</p></div>
+        <div class="title-wrapper">
+          <router-link class="title-1" :to="'/article/' + index">百度{{index}}</router-link>
+        </div>
+        <div class="content-wrapper">
+          <p class="content-1">内容</p>
+        </div>
         <div class="time-wrapper"><span class="time-1">2016.10.21</span></div>
       </li>
     </ul>

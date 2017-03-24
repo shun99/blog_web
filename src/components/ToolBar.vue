@@ -1,24 +1,22 @@
 <template>
   <div class="toolbar-vue">
     <div class="header-vue">
-      <div class="title-wrapper" @click="toggle(true)">
-        <span class="icon iconfont icon-qietu02"></span>
+      <div class="title-wrapper">
+        <span class="icon iconfont icon-qietu02" @click="toggle(true)"></span>
         <span class="name">{{owner.name}}</span>
         <div class="menu-item-wrapper">
-          <div class="item-wrapper" v-for="(menuItem, index) in menuItemList"
-               @click="pageType(index)">
-            <span class="title">{{menuItem}}</span>
+          <div class="item-wrapper" v-for="(menuItem, index) in menuItemList">
+            <router-link class="title" :to="'/' + menuItem">{{menuItem}}</router-link>
           </div>
         </div>
       </div>
       <span class="icon iconfont icon-github"></span>
     </div>
     <mu-drawer :width="myWidth" :open="open" :docked="docked" @close="toggle()">
-      <div class="sidebar-wrapper border-1px">
+      <div class="sidebar-wrapper" @click="closeSlide()">
         <div>
-          <div class="item-wrapper" v-for="(menuItem, index) in menuItemList"
-               @click="pageType(index)">
-            <span class="title">{{menuItem}}</span>
+          <div class="item-wrapper" v-for="(menuItem, index) in menuItemList">
+            <router-link class="title" :to="'/' + menuItem">{{menuItem}}</router-link>
           </div>
         </div>
       </div>
@@ -51,9 +49,8 @@
         this.open = !this.open;
         this.docked = !flag;
       },
-      pageType (type) {
+      closeSlide () {
         this.open = false;
-        this.$emit('pageType', type);
       }
     }
   };

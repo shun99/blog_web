@@ -8,14 +8,16 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path: '/article',
-      name: 'Article',
-      component: Article
+      path: '/',
+      component: ListView
     },
     {
-      path: '/',
-      name: 'ListView',
+      path: '/:id',
       component: ListView
+    },
+    {
+      path: '/article/:id',
+      component: Article
     }
   ]
 });

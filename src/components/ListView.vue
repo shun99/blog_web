@@ -3,10 +3,10 @@
     <ul>
       <li class="item-wrapper border-1px" v-for="(item, index) in itemList" ref="itemWrapper">
         <div class="title-wrapper">
-          <router-link class="title-1" :to="'/article/' + index">百度{{index}}</router-link>
+          <router-link class="title-1" :to="'/article/' + item.id">{{item.title}}</router-link>
         </div>
         <div class="content-wrapper">
-          <p class="content-1">内容</p>
+          <p class="content-1">{{item.des}}</p>
         </div>
         <div class="time-wrapper"><span class="time-1">2016.10.21</span></div>
       </li>
@@ -24,39 +24,42 @@
         itemList: [],
         loadMoreHeight: 0,
         scrollY: 0,
-        loading: false,
-        curPage: 0
+        listData: {
+          loading: false,
+          curPage: 1,
+          haveMore: true,
+          pageSize: 10
+        }
       };
     },
     props: {
       api: ''
     },
     created () {
-      this.loading = false;
-      this.curPage = 0;
+      this.listData.loading = false;
+      this.listData.curPage = 1;
+      this.listData.haveMore = true;
       this.loadData();
     },
     methods: {
       loadData () {
-        console.log(this.curPage);
-        if (this.curPage > 3 || this.loading) {
-          this.loading = true;
+        if (!this.listData.haveMore || this.listData.loading) {
           return;
         }
-        this.curPage++;
-        this.loading = true;
-        this.$http.get(this.api).then(response => {
-          console.log(this.itemList.length);
-          response.body.data.forEach((rating) => {
-            this.itemList.push(rating);
+        this.listData.loading = true;
+        this.$http.get(this.api + '&page=' + this.listData.curPage + '&size=' + this.listData.pageSize)
+          .then(response => {
+            this.listData.haveMore = response.body.haveMore;
+            this.listData.curPage++;
+            response.body.data.forEach((rating) => {
+              this.itemList.push(rating);
+            });
+            this.$nextTick(() => {
+              this._initScroll();
+              this._calculateHeight();
+              this.listData.loading = false;
+            });
           });
-          console.log(this.itemList.length);
-          this.$nextTick(() => {
-            this._initScroll();
-            this._calculateHeight();
-            this.loading = false;
-          });
-        });
       },
       _initScroll () {
         if (!this.scroll) {
@@ -68,7 +71,7 @@
           this.scroll.refresh();
         }
         this.scroll.on('scroll', (pos) => {
-          if (this.loading) {
+          if (this.listData.loading) {
             return;
           }
           this.scrollY = Math.abs(Math.round(pos.y));

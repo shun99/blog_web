@@ -13,12 +13,14 @@
   export default {
     data () {
       return {
-        input: ''
+        input: '',
+        api: 'http://192.168.11.148:3000/api/article?id='
       };
     },
     created () {
-      this.$http.get('/api/makedown').then(response => {
-        this.input = response.body.data.mdData;
+      let url = this.api + this.$route.params.id;
+      this.$http.get(url).then(response => {
+        this.input = response.body.data.content;
       });
     },
     computed: {

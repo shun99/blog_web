@@ -20,7 +20,7 @@
           content: '',
           articleType: 1
         },
-        submitUrl: 'http://192.168.11.148:3000/api/rating'
+        submitUrl: 'http://192.168.11.148:3000/api/article'
       };
     },
     methods: {

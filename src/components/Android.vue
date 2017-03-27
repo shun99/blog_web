@@ -9,7 +9,7 @@
   export default {
     data () {
       return {
-        api: '/api/ratings'
+        api: 'http://192.168.11.148:3000/api/list?type=1'
       };
     },
     components: {

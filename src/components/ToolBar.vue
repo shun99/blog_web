@@ -2,7 +2,7 @@
   <div class="toolbar-vue">
     <div class="header-vue">
       <div class="title-wrapper">
-        <span class="icon iconfont icon-qietu02" @click="toggle(true)"></span>
+        <span class="icon iconfont icon-qietu02" @click="slideStatus()"></span>
         <span class="name">{{owner.name}}</span>
         <div class="menu-item-wrapper">
           <div class="item-wrapper" v-for="(menuItem, index) in menuItemList">
@@ -12,15 +12,16 @@
       </div>
       <span class="icon iconfont icon-github"></span>
     </div>
-    <mu-drawer :width="myWidth" :open="open" :docked="docked" @close="toggle()">
-      <div class="sidebar-wrapper" @click="closeSlide()">
-        <div>
+    <div v-show="showSlide" class="sidebar-wrapper">
+      <div class="slide-bg" @click="slideStatus()"></div>
+      <transition name="slide">
+        <div v-show="showSlide" class="slide-content-wrapper" @click="slideStatus()">
           <div class="item-wrapper" v-for="(menuItem, index) in menuItemList">
             <router-link class="title" :to="'/' + menuItem">{{menuItem}}</router-link>
           </div>
         </div>
-      </div>
-    </mu-drawer>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -29,7 +30,7 @@
   export default {
     data () {
       return {
-        open: false,
+        showSlide: false,
         docked: true,
         myWidth: 200
       };
@@ -45,18 +46,22 @@
       }
     },
     methods: {
-      toggle (flag) {
-        this.open = !this.open;
-        this.docked = !flag;
-      },
-      closeSlide () {
-        this.open = false;
+      slideStatus () {
+        console.log('..' + this.showSlide);
+        this.showSlide = !this.showSlide;
       }
     }
   };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+
+  .slide-enter-active, .slide-leave-active
+    transition: all 0.5s linear
+
+  .slide-enter, .slide-leave-active
+    transform: translate3d(-100%, 0, 0)
+
   .toolbar-vue
     .header-vue
       display: flex
@@ -100,16 +105,37 @@
         color: #fff
         margin-left: 6px
     .sidebar-wrapper
-      display: flex
-      align-items: center
-      justify-content: center
-      height: 100%
-      .item-wrapper
+      position fixed
+      top: 0px
+      left 0px
+      right 0px
+      bottom 0px
+      z-index 100
+      .slide-bg
+        z-index 100
+        width: 100%
+        height: 100%
+        background-color: #000
+        opacity: 0.4
+      .slide-content-wrapper
+        z-index 200
+        position: absolute
         display: flex
-        align-items: center
+        flex-direction: column
         justify-content: center
-        height: 40px
-        .title
-          font-size: 14px
-          color: black
+        left: 0px
+        top: 0px
+        bottom: 0px
+        max-width: 300px
+        width: 60%
+        background: #fff
+        .item-wrapper
+          z-index 300
+          display: flex
+          align-items: center
+          justify-content: center
+          height: 40px
+          .title
+            font-size: 14px
+            color: #000
 </style>

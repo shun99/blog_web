@@ -4,6 +4,12 @@
       <textarea class="item title" placeholder="标题" type="title" v-model="formData.title"></textarea>
       <textarea class="item des" placeholder="描述" v-model="formData.des"></textarea>
       <textarea class="item content" placeholder="内容" v-model="formData.content"></textarea>
+      <div class="sort-wrapper">
+        <span class="sort-title">分类</span>
+        <span class="sort-content" v-for="(sort, index) in sortData"
+              :class="{'checked-sort': sort.type === formData.articleType}"
+              @click="goCheckItem(sort.type)">{{sort.des}}</span>
+      </div>
       <button class="button" @click="submitData()">提交</button>
     </div>
   </div>
@@ -20,15 +26,35 @@
           content: '',
           articleType: 1
         },
-        submitUrl: 'http://192.168.11.148:3000/api/article'
+        submitUrl: 'http://192.168.11.148:3000/api/article',
+        sortData: [
+          {
+            des: 'android',
+            type: 1
+          },
+          {
+            des: 'web',
+            type: 2
+          },
+          {
+            des: 'node',
+            type: 3
+          },
+          {
+            des: 'life',
+            type: 4
+          }
+        ]
       };
     },
     methods: {
       submitData () {
-        console.log('....');
         this.$http.post(this.submitUrl, this.formData).then((response) => {
           console.log(response.body);
         });
+      },
+      goCheckItem (index) {
+        this.formData.articleType = index;
       }
     }
   };
@@ -69,6 +95,22 @@
         height: 70px
       .content
         flex 1
+      .sort-wrapper
+        margin-top 10px
+        .sort-title
+          color #222
+          font-size: 12px
+        .sort-content
+          font-size: 12px
+          margin-left: 10px
+          padding 1px 5px
+          color #909090
+          background #fff
+          border: 1px solid #f1f1f1
+        .checked-sort
+          background theme-color
+          border none
+          color #fff
       .button
         width: 100%
         max-width: 300px
@@ -81,4 +123,5 @@
         border-radius: 2px;
         border: none;
         outline: none;
+
 </style>

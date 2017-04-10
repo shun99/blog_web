@@ -5,7 +5,7 @@
       <textarea class="item des" placeholder="描述" v-model="formData.des"></textarea>
       <textarea class="item content" placeholder="内容" v-model="formData.content"></textarea>
       <div class="sort-wrapper">
-        <span class="sort-title">分类</span>
+        <span class="sort-title">分类:</span>
         <span class="sort-content" v-for="(sort, index) in sortData"
               :class="{'checked-sort': sort.type === formData.articleType}"
               @click="goCheckItem(sort.type)">{{sort.des}}</span>

@@ -11,6 +11,11 @@
   import marked from 'marked';
 
   export default {
+    watch: {
+      '$route' (to, from) {
+        this.getArticle();
+      }
+    },
     data () {
       return {
         input: '',
@@ -18,10 +23,15 @@
       };
     },
     created () {
-      let url = this.api + this.$route.params.id;
-      this.$http.get(url).then(response => {
-        this.input = response.body.data.content;
-      });
+      this.getArticle();
+    },
+    methods: {
+      getArticle () {
+        let url = this.api + this.$route.params.id;
+        this.$http.get(url).then(response => {
+          this.input = response.body.data.content;
+        });
+      }
     },
     computed: {
       compiledMarkdown () {

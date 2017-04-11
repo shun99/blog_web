@@ -1,14 +1,11 @@
 <template>
   <div class="article-vue">
-    <div class="where">{{$route.params.id}}</div>
-    <div>
-      <div v-html="compiledMarkdown"></div>
-    </div>
+    <markdown :content="input"></markdown>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import marked from 'marked';
+  import markdown from '../components/markdown';
 
   export default {
     watch: {
@@ -25,17 +22,15 @@
     created () {
       this.getArticle();
     },
+    components: {
+      markdown
+    },
     methods: {
       getArticle () {
         let url = this.api + this.$route.params.id;
         this.$http.get(url).then(response => {
           this.input = response.body.data.content;
         });
-      }
-    },
-    computed: {
-      compiledMarkdown () {
-        return marked(this.input, {sanitize: true});
       }
     }
   };
@@ -49,10 +44,4 @@
     vertical-align: top
     box-sizing: border-box
     font-size: 14px
-    padding: 0 20px
-    code
-      color: #f66
-    .where
-      font-size: 14px
-      color: #f66
 </style>

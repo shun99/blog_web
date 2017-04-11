@@ -1,6 +1,6 @@
 <template>
   <div class="toolbar-vue">
-    <div class="header-vue">
+    <div class="header-wrapper">
       <div class="title-wrapper">
         <span class="icon iconfont icon-qietu02" @click="slideStatus()"></span>
         <span class="name">{{owner.name}}</span>
@@ -63,7 +63,12 @@
     transform: translate3d(-100%, 0, 0)
 
   .toolbar-vue
-    .header-vue
+    .header-wrapper
+      z-index 100
+      position: fixed
+      top: 0px
+      left: 0px
+      right 0px
       display: flex
       justify-content: space-between
       align-items: center
@@ -110,15 +115,13 @@
       left 0px
       right 0px
       bottom 0px
-      z-index 100
+      z-index 101
       .slide-bg
-        z-index 100
         width: 100%
         height: 100%
         background-color: #000
         opacity: 0.4
       .slide-content-wrapper
-        z-index 200
         position: absolute
         display: flex
         flex-direction: column
@@ -130,7 +133,6 @@
         width: 60%
         background: #fff
         .item-wrapper
-          z-index 300
           display: flex
           align-items: center
           justify-content: center

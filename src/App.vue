@@ -39,6 +39,7 @@
   .app-vue
     font-size: 0px
     .app-content-wrapper
+      z-index 0
       position: absolute
       top: 50px
       left: 0px

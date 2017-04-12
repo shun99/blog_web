@@ -1,7 +1,7 @@
 <!--markdown解析器-->
 <template>
-  <div class="mdContainer">
-    <div class="previewContainer markdown-body" v-html="compiledMarkdown">
+  <div class="markdown-vue">
+    <div class="markdown-body" v-html="compiledMarkdown">
     </div>
   </div>
 </template>
@@ -50,16 +50,9 @@
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../assets/css/github-markdown.css";
   @import "../../assets/css/atom-one-dark.min.css";
-  .mdContainer
+  .markdown-vue
     width: 100%
     height: 100%
-    background: lightblue
-    .previewContainer
-      width: 100%
-      height: 100%
-      box-sizing: border-box
-      background: #fff
-      overflow: auto
-      padding: 10px
+    padding: 10px
 
 </style>

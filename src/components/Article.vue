@@ -40,6 +40,7 @@
   .article-vue
     font-family: 'Helvetica Neue', Arial, sans-serif
     display: inline-block
+    width: 100%;
     height: 100%
     vertical-align: top
     box-sizing: border-box

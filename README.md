@@ -115,4 +115,6 @@ apiRoutes.get('/makedown', function (req, res) {
 |slider|101|
 
 # 调整结构
-
+# fix bug
+修复markdown左右不滚动
+去掉父布局的auto

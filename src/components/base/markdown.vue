@@ -39,7 +39,6 @@
     },
     computed: {
       compiledMarkdown () {
-        console.log('...2');
         return marked(this.content, {
           sanitize: true
         });
@@ -49,8 +48,8 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  @import "../assets/css/github-markdown.css";
-  @import "../assets/css/atom-one-dark.min.css";
+  @import "../../assets/css/github-markdown.css";
+  @import "../../assets/css/atom-one-dark.min.css";
   .mdContainer
     width: 100%
     height: 100%

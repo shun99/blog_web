@@ -47,7 +47,6 @@
     },
     methods: {
       slideStatus () {
-        console.log('..' + this.showSlide);
         this.showSlide = !this.showSlide;
       }
     }

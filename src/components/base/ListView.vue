@@ -97,7 +97,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  @import "../assets/stylus/mixin.styl"
+  @import "../../assets/stylus/mixin.styl"
 
   .list-vue
     position: absolute

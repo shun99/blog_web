@@ -9,7 +9,7 @@
 
 
 <script type="text/ecmascript-6">
-  import ToolBar from '@/components/ToolBar';
+  import ToolBar from '@/components/base/ToolBar';
 
   export default {
     data () {

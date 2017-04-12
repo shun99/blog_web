@@ -4,7 +4,7 @@
 
 
 <script type="text/ecmascript-6">
-  import ListView from '@/components/ListView';
+  import ListView from '@/components/base/ListView';
 
   export default {
     data () {

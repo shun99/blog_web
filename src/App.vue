@@ -4,12 +4,14 @@
     <keep-alive>
       <router-view class="app-content-wrapper"></router-view>
     </keep-alive>
+    <login></login>
   </div>
 </template>
 
 
 <script type="text/ecmascript-6">
   import ToolBar from '@/components/base/ToolBar';
+  import Login from '@/components/user/Login';
 
   export default {
     data () {
@@ -21,7 +23,8 @@
       };
     },
     components: {
-      'ToolBar': ToolBar
+      'ToolBar': ToolBar,
+      'login': Login
     },
     methods: {
       pageType (type) {

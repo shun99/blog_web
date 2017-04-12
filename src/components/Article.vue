@@ -5,7 +5,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import markdown from './base/markdown';
+  import markdown from './base/MDPrase.vue';
 
   export default {
     watch: {

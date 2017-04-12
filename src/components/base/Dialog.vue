@@ -4,24 +4,15 @@
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="modal-header">
-            <slot name="header">
-              default header
-            </slot>
+            <slot name="header"></slot>
           </div>
-
           <div class="modal-body">
-            <slot name="body">
-              default body
-            </slot>
+            <slot name="body"></slot>
           </div>
-
           <div class="modal-footer">
             <slot name="footer">
-              <button class="modal-default-button" @click="close">
-                des
-              </button>
-              <button class="modal-default-button" @click="close">
-                OK
+              <button v-for="(btn, index) in btnList" class="modal-default-button"
+                      @click="close(index)">{{btn.des}}
               </button>
             </slot>
           </div>
@@ -33,15 +24,25 @@
 
 <script type="text/ecmascript-6">
   export default{
+    props: {
+      btnList: {
+        type: Array,
+        default: [
+          {des: '确定'},
+          {des: '取消'}
+        ]
+      }
+    },
     methods: {
-      close () {
-        this.$emit('close');
+      close (index) {
+        this.$emit('close', index);
       }
     }
   };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  @import "../../assets/stylus/mixin.styl";
 
   .modal-enter
     opacity: 0;
@@ -50,8 +51,7 @@
     opacity: 0;
 
   .modal-enter .modal-container, .modal-leave-active .modal-container
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
+    transform: rotate(360deg);
 
   .modal-mask
     position: fixed;
@@ -63,26 +63,44 @@
     background-color: rgba(0, 0, 0, .5);
     display: table;
     transition: opacity .3s ease;
-    font-size: 12px
     .modal-wrapper
       display: table-cell;
       vertical-align: middle;
       .modal-container
-        width: 300px;
+        width: 26%
+        min-width 260px
         margin: 0px auto;
-        padding: 10px 20px;
         background-color: #fff;
         border-radius: 2px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
         transition: all .3s ease;
         font-family: Helvetica, Arial, sans-serif;
+        .modal-header, .modal-body
+          display flex
+          justify-content center
+          align-items center
         .modal-header
-          h3
-            margin-top: 0;
-            color: #42b983;
+          font-size: 16px
+          min-height 40px
+          padding 10px 20px
+          background theme-color
+          color: #fff;
         .modal-body
-          margin: 20px 0;
+          font-size: 12px
+          min-height 80px
         .modal-footer
+          padding-bottom 10px
+          display flex
+          flex-direction row-reverse
+          font-size: 12px
           .modal-default-button
-            color #7e8c8d
+            background theme-color
+            color #fff
+            padding 2px 10px
+            margin-right 10px
+            font-size 12px
+            -webkit-appearance: none;
+            border-radius: 1px;
+            border: none;
+            outline: none;
 </style>

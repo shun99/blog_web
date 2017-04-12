@@ -88,9 +88,6 @@
         }
         this.loadMoreHeight = itemListHeight - this.$refs.listWrapper.clientHeight;
         console.log(this.loadMoreHeight);
-      },
-      clickItem (item) {
-        this.$emit('clickItem', item);
       }
     }
   };

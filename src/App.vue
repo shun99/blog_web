@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="app-vue">
-    <ToolBar :owner="owner" :menuItemList="menuItemList" @pageType="pageType"></ToolBar>
+    <ToolBar :owner="owner" :menuItemList="menuItemList"></ToolBar>
     <keep-alive>
       <router-view class="app-content-wrapper"></router-view>
     </keep-alive>
@@ -25,14 +25,6 @@
     components: {
       'ToolBar': ToolBar,
       'login': Login
-    },
-    methods: {
-      pageType (type) {
-        console.log(type);
-      },
-      openArticle (item) {
-        console.log(item);
-      }
     }
   };
 </script>

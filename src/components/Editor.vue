@@ -14,6 +14,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import api from '../assets/js/api';
 
   export default {
     data () {
@@ -24,7 +25,7 @@
           content: '',
           articleType: 1
         },
-        submitUrl: 'http://192.168.11.148:3000/api/article',
+        submitUrl: api.article_post,
         sortData: [
           {
             des: 'android',

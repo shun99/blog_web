@@ -6,17 +6,19 @@
 
 <script type="text/ecmascript-6">
   import markdown from './base/MDPrase.vue';
+  import api from '../assets/js/api';
 
   export default {
     watch: {
       '$route' (to, from) {
-        this.getArticle();
+        if (this.$route.params.id) {
+          this.getArticle();
+        }
       }
     },
     data () {
       return {
-        input: '',
-        api: 'http://192.168.11.148:3000/api/article?id='
+        input: ''
       };
     },
     created () {
@@ -27,7 +29,7 @@
     },
     methods: {
       getArticle () {
-        let url = this.api + this.$route.params.id;
+        let url = api.article_get + this.$route.params.id;
         this.$http.get(url).then(response => {
           this.input = response.body.data.content;
         });

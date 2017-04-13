@@ -1,15 +1,16 @@
 <template>
-  <android :api="api"></android>
+  <android :api="android"></android>
 </template>
 
 
 <script type="text/ecmascript-6">
   import ListView from '@/components/base/ListView';
+  import api from '../assets/js/api';
 
   export default {
     data () {
       return {
-        api: 'http://192.168.11.148:3000/api/list?type=1'
+        android: api.android
       };
     },
     components: {

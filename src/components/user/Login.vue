@@ -2,14 +2,16 @@
   <myDialog v-if="show" :btnList="btnList" @close="close">
     <div slot="header">登入</div>
     <div slot="body" class="body-content">
-      <input class="app-input" type="number" v-model="user.phone" placeholder="手机">
-      <input class="app-input" type="password" v-model="user.pwd" placeholder="密码">
+      <input class="app-input" type="tel" v-model="user.phone" placeholder="手机">
+      <input class="app-input" type="password" v-model="user.password" placeholder="密码">
     </div>
   </myDialog>
 </template>
 
 <script type="text/ecmascript-6">
   import Dialog from '../base/Dialog.vue';
+  import api from '../../assets/js/api';
+  import {saveToSession, StorageKey} from '../../assets/js/storageUtils';
 
   export default {
     data () {
@@ -17,7 +19,7 @@
         show: true,
         user: {
           phone: '',
-          pwd: ''
+          password: ''
         },
         btnList: [
           {des: '登入'},
@@ -30,8 +32,27 @@
     },
     methods: {
       close (index) {
-        console.log('..' + index);
-        this.show = false;
+        if (index === 0) {
+          this.login();
+        } else {
+          this.show = false;
+        }
+      },
+      login () {
+        console.log(this.user);
+        this.$http
+          .post(api.login, this.user)
+          .then((response) => {
+            if (response.body.code === 0) {
+              alert('登入成功');
+              saveToSession(StorageKey.currentUser, StorageKey.token, response.body.data.token);
+              saveToSession(StorageKey.currentUser, StorageKey.phone, this.user.phone);
+              this.show = false;
+            } else {
+              alert('登入失败');
+              this.show = false;
+            }
+          });
       }
     }
   };

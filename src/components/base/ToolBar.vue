@@ -2,7 +2,7 @@
   <div class="toolbar-vue">
     <div class="header-wrapper">
       <div class="title-wrapper">
-        <span class="icon iconfont icon-qietu02" @click="slideStatus()"></span>
+        <span class="icon iconfont icon-menu" @click="slideStatus()"></span>
         <span class="name">{{owner.name}}</span>
         <div class="menu-item-wrapper">
           <div class="item-wrapper" v-for="(menuItem, index) in menuItemList">
@@ -28,7 +28,7 @@
 
 <script type="text/ecmascript-6">
   import Login from '@/components/user/Login';
-  import {loadFromSession, StorageKey} from '../../assets/js/storageUtils';
+  import {loadFromSession, StorageKey} from '../../utils/storageUtils';
   import Router from 'vue-router';
   let router = new Router();
 
@@ -116,10 +116,10 @@
             .title
               font-size: 14px
               color: #fff
-      .icon-github, .icon-qietu02
+      .icon-github, .icon-menu
         font-size: 20px
         color: #fff
-        &.icon-qietu02
+        &.icon-menu
           display: none
           @media only screen and (max-width: 640px)
             display inline

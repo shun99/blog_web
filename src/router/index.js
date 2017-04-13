@@ -41,7 +41,7 @@ export default new Router({
       component: About
     },
     {
-      path: '/Edit',
+      path: '/Edit/:update',
       component: Editor
     }
 

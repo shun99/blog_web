@@ -14,10 +14,23 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import api from '../assets/js/api';
-  import {StorageKey, loadFromSession} from '../assets/js/storageUtils';
+  import api from '../app/api';
+  import {StorageKey, loadFromSession} from '../utils/storageUtils';
 
   export default {
+    watch: {
+      '$route' (to, from) {
+        if (this.$route.params.update) {
+          console.log(this.$store.state.article.entity);
+        }
+      }
+    },
+    created () {
+      console.log('created...');
+      if (this.$route.params.update) {
+        console.log(this.$store.state.article.entity);
+      }
+    },
     data () {
       return {
         userInfo: loadFromSession(StorageKey.currentUser, StorageKey.currentUser),

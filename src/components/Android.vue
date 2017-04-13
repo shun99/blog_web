@@ -5,7 +5,7 @@
 
 <script type="text/ecmascript-6">
   import ListView from '@/components/base/ListView';
-  import api from '../assets/js/api';
+  import api from '../app/api';
 
   export default {
     data () {

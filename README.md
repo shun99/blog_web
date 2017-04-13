@@ -235,3 +235,4 @@ export let StorageKey = {
 //跳转
   router.push({ path: '/Edit' });
 ```
+# vuex

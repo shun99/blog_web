@@ -10,8 +10,8 @@
 
 <script type="text/ecmascript-6">
   import Dialog from '../base/Dialog.vue';
-  import api from '../../assets/js/api';
-  import {saveToSession, StorageKey} from '../../assets/js/storageUtils';
+  import api from '../../app/api';
+  import {saveToSession, StorageKey} from '../../utils/storageUtils';
   export default {
     props: {
       show: {

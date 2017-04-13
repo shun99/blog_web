@@ -1,5 +1,5 @@
 <template>
-  <div class="about-vue">{{msg}}</div>
+  <div class="about-vue">关于</div>
 
 </template>
 
@@ -13,10 +13,6 @@
       };
     },
     created () {
-      this.$http.get('http://192.168.11.148:3000/api/rating').then(response => {
-        this.msg = response.body.data;
-        console.log(this.msg);
-      });
     }
   };
 </script>

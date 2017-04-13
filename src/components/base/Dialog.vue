@@ -12,7 +12,7 @@
           <div class="modal-footer">
             <slot name="footer">
               <button v-for="(btn, index) in btnList" class="modal-default-button"
-                      @click="close(index)">{{btn.des}}
+                      @click="clickBtn(index)">{{btn.des}}
               </button>
             </slot>
           </div>
@@ -34,8 +34,8 @@
       }
     },
     methods: {
-      close (index) {
-        this.$emit('close', index);
+      clickBtn (index) {
+        this.$emit('clickBtn', index);
       }
     }
   };

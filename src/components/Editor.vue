@@ -15,10 +15,12 @@
 
 <script type="text/ecmascript-6">
   import api from '../assets/js/api';
+  import {StorageKey, loadFromSession} from '../assets/js/storageUtils';
 
   export default {
     data () {
       return {
+        userInfo: loadFromSession(StorageKey.currentUser, StorageKey.currentUser),
         formData: {
           title: '',
           des: '',
@@ -48,8 +50,11 @@
     },
     methods: {
       submitData () {
+        if (!this.userInfo || !this.userInfo.token) {
+          alert('未登入');
+          return;
+        }
         this.$http.post(this.submitUrl, this.formData).then((response) => {
-          console.log(response.body);
         });
       },
       goCheckItem (index) {

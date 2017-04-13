@@ -35,7 +35,6 @@ export function loadFromLocal (id, key, def) {
 
 export function saveToSession (id, key, value) {
   let info = window.sessionStorage._blog_info;
-  console.log(info);
   if (!info) {
     info = {};
     info[id] = {};
@@ -81,6 +80,7 @@ export class Storage {
  * 导出对象
  */
 export let StorageKey = {
+  user: 'user',
   currentUser: 'user_current',
   token: 'user_token',
   phone: 'user_phone'

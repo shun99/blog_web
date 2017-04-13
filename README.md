@@ -226,3 +226,12 @@ export let StorageKey = {
   let myStorage = new Storage();
   //myStorage.token 可以获取到Storage里面的成员变量token
 ```
+## login跳转
+使用编程式路由时，当页面没有Router对象时，创建
+```
+//创建
+  import Router from 'vue-router';
+  let router = new Router();
+//跳转
+  router.push({ path: '/Edit' });
+```

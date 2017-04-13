@@ -1,5 +1,5 @@
 <template>
-  <myDialog v-if="show" :btnList="btnList" @close="close">
+  <myDialog v-if="show" :btnList="btnList" @clickBtn="clickBtn">
     <div slot="header">登入</div>
     <div slot="body" class="body-content">
       <input class="app-input" type="tel" v-model="user.phone" placeholder="手机">
@@ -12,11 +12,15 @@
   import Dialog from '../base/Dialog.vue';
   import api from '../../assets/js/api';
   import {saveToSession, StorageKey} from '../../assets/js/storageUtils';
-
   export default {
+    props: {
+      show: {
+        type: Boolean,
+        default: false
+      }
+    },
     data () {
       return {
-        show: true,
         user: {
           phone: '',
           password: ''
@@ -31,28 +35,36 @@
       'myDialog': Dialog
     },
     methods: {
-      close (index) {
+      clickBtn (index) {
         if (index === 0) {
           this.login();
         } else {
-          this.show = false;
+          this.closeDialog(0);
         }
       },
       login () {
         console.log(this.user);
-        this.$http
-          .post(api.login, this.user)
+        this.$http.post(api.login, this.user)
           .then((response) => {
             if (response.body.code === 0) {
+              this.user.token = response.body.data.token;
               alert('登入成功');
-              saveToSession(StorageKey.currentUser, StorageKey.token, response.body.data.token);
-              saveToSession(StorageKey.currentUser, StorageKey.phone, this.user.phone);
-              this.show = false;
+              saveToSession(StorageKey.user, StorageKey.currentUser, this.user);
+              this.closeDialog(0);
             } else {
               alert('登入失败');
-              this.show = false;
+              this.closeDialog(1);
             }
           });
+      },
+      /**
+       * 0 登入成功
+       * 1 取消登入
+       * 2 登入失败
+       * @param index
+       */
+      closeDialog (index) {
+        this.$emit('close', index);
       }
     }
   };

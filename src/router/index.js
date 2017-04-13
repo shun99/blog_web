@@ -38,11 +38,11 @@ export default new Router({
     },
     {
       path: '/About',
-      component: Editor
+      component: About
     },
     {
-      path: '/About1',
-      component: About
+      path: '/Edit',
+      component: Editor
     }
 
   ]

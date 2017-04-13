@@ -10,7 +10,7 @@
           </div>
         </div>
       </div>
-      <span class="icon iconfont icon-github"></span>
+      <span class="icon iconfont icon-github" @click="user()"></span>
     </div>
     <div v-show="showSlide" class="sidebar-wrapper">
       <div class="slide-bg" @click="slideStatus()"></div>
@@ -22,17 +22,21 @@
         </div>
       </transition>
     </div>
+    <login :show="showLogin" @close="closeLogin"></login>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import Login from '@/components/user/Login';
+  import {loadFromSession, StorageKey} from '../../assets/js/storageUtils';
+  import Router from 'vue-router';
+  let router = new Router();
 
   export default {
     data () {
       return {
         showSlide: false,
-        docked: true,
-        myWidth: 200
+        showLogin: false
       };
     },
     props: {
@@ -45,9 +49,24 @@
         default: []
       }
     },
+    components: {
+      'login': Login
+    },
     methods: {
       slideStatus () {
         this.showSlide = !this.showSlide;
+      },
+      user () {
+        let user = loadFromSession(StorageKey.user, StorageKey.currentUser);
+        if (!user || !user.token) {
+          this.showLogin = true;
+        } else {
+          router.push({path: '/Edit'});
+        }
+      },
+      closeLogin (index) {
+        console.log('...' + index);
+        this.showLogin = false;
       }
     }
   };

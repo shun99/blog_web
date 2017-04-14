@@ -15,7 +15,6 @@
 
 <script type="text/ecmascript-6">
   import api from '../app/api';
-  import {StorageKey, loadFromSession} from '../utils/storageUtils';
 
   export default {
     watch: {
@@ -33,7 +32,6 @@
     },
     data () {
       return {
-        userInfo: loadFromSession(StorageKey.currentUser, StorageKey.currentUser),
         formData: {
           title: '',
           des: '',
@@ -63,15 +61,32 @@
     },
     methods: {
       submitData () {
-        if (!this.userInfo || !this.userInfo.token) {
+        if (!this.$store.getters.userIsLogin) {
           alert('未登入');
           return;
         }
-        this.$http.post(this.submitUrl, this.formData).then((response) => {
-        });
+        if (this.verifyFormData()) {
+          this.$http.post(this.submitUrl, this.formData).then((response) => {
+          });
+        }
       },
       goCheckItem (index) {
         this.formData.articleType = index;
+      },
+      verifyFormData () {
+        if (!this.formData.title) {
+          alert('标题不能为空');
+          return false;
+        }
+        if (!this.formData.des) {
+          alert('描述不能为空');
+          return false;
+        }
+        if (!this.formData.content) {
+          alert('内容不能为空');
+          return false;
+        }
+        return true;
       }
     }
   };

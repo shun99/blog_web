@@ -10,7 +10,7 @@
           </div>
         </div>
       </div>
-      <span class="icon iconfont icon-github" @click="user()"></span>
+      <span class="icon iconfont icon-github" @click="jumpUserCenter()"></span>
     </div>
     <div v-show="showSlide" class="sidebar-wrapper">
       <div class="slide-bg" @click="slideStatus()"></div>
@@ -22,21 +22,16 @@
         </div>
       </transition>
     </div>
-    <login :show="showLogin" @close="closeLogin"></login>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import Login from '@/components/user/Login';
-  import {loadFromSession, StorageKey} from '../../utils/storageUtils';
-  import Router from 'vue-router';
-  let router = new Router();
+  import * as vuexTypes from '../../store/vuex-types';
 
   export default {
     data () {
       return {
-        showSlide: false,
-        showLogin: false
+        showSlide: false
       };
     },
     props: {
@@ -49,24 +44,16 @@
         default: []
       }
     },
-    components: {
-      'login': Login
-    },
     methods: {
       slideStatus () {
         this.showSlide = !this.showSlide;
       },
-      user () {
-        let user = loadFromSession(StorageKey.user, StorageKey.currentUser);
-        if (!user || !user.token) {
-          this.showLogin = true;
+      jumpUserCenter () {
+        if (!this.$store.getters.userIsLogin) {
+          this.$store.commit(vuexTypes.USER_SHOW_LOGIN, true);
         } else {
-          router.push({path: '/Edit'});
+          this.$router.push({path: '/article/new'});
         }
-      },
-      closeLogin (index) {
-        console.log('...' + index);
-        this.showLogin = false;
       }
     }
   };

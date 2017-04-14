@@ -33,17 +33,20 @@ export default new Router({
       component: Node
     },
     {
+      path: '/article/new',
+      component: Editor
+    },
+    {
+      path: '/article/update',
+      component: Editor
+    },
+    {
       path: '/article/:id',
       component: Article
     },
     {
       path: '/About',
       component: About
-    },
-    {
-      path: '/Edit/:update',
-      component: Editor
     }
-
   ]
 });

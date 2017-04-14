@@ -236,3 +236,4 @@ export let StorageKey = {
   router.push({ path: '/Edit' });
 ```
 # vuex
+使用vuex传递数据，优化代码结构

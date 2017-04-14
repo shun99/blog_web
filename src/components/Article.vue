@@ -42,7 +42,7 @@
         });
       },
       item (index) {
-        this.$router.push({path: '/Edit/true'});
+        this.$router.push({path: '/article/update'});
       }
     }
   };

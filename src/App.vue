@@ -4,12 +4,16 @@
     <keep-alive>
       <router-view class="app-content-wrapper"></router-view>
     </keep-alive>
+    <login></login>
+    <toast></toast>
   </div>
 </template>
 
 
 <script type="text/ecmascript-6">
   import ToolBar from '@/components/base/ToolBar';
+  import Toast from '@/components/base/Toast';
+  import Login from '@/components/user/Login';
 
   export default {
     data () {
@@ -21,7 +25,9 @@
       };
     },
     components: {
-      'ToolBar': ToolBar
+      'ToolBar': ToolBar,
+      'login': Login,
+      'toast': Toast
     }
   };
 </script>

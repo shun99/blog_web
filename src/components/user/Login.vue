@@ -11,14 +11,8 @@
 <script type="text/ecmascript-6">
   import Dialog from '../base/Dialog.vue';
   import api from '../../app/api';
-  import {saveToSession, StorageKey} from '../../utils/storageUtils';
+  import * as vuexTypes from '../../store/vuex-types';
   export default {
-    props: {
-      show: {
-        type: Boolean,
-        default: false
-      }
-    },
     data () {
       return {
         user: {
@@ -34,37 +28,45 @@
     components: {
       'myDialog': Dialog
     },
+    computed: {
+      show () {
+        return this.$store.state.user.showLogin;
+      }
+    },
     methods: {
       clickBtn (index) {
         if (index === 0) {
-          this.login();
+          if (this.verifyLogin()) {
+            this.login();
+          }
         } else {
-          this.closeDialog(0);
+          this.$store.commit(vuexTypes.USER_SHOW_LOGIN, false);
         }
       },
       login () {
-        console.log(this.user);
         this.$http.post(api.login, this.user)
           .then((response) => {
             if (response.body.code === 0) {
               this.user.token = response.body.data.token;
-              alert('登入成功');
-              saveToSession(StorageKey.user, StorageKey.currentUser, this.user);
-              this.closeDialog(0);
+              this.$store.commit(vuexTypes.USER_INFO_UPDATE, this.user);
+              this.$store.commit(vuexTypes.APP_SHOW_TOAST, '登入成功');
+              this.$store.commit(vuexTypes.USER_SHOW_LOGIN, false);
             } else {
-              alert('登入失败');
-              this.closeDialog(1);
+              this.$store.commit(vuexTypes.APP_SHOW_TOAST, '登入失败');
+              this.$store.commit(vuexTypes.USER_SHOW_LOGIN, false);
             }
           });
       },
-      /**
-       * 0 登入成功
-       * 1 取消登入
-       * 2 登入失败
-       * @param index
-       */
-      closeDialog (index) {
-        this.$emit('close', index);
+      verifyLogin () {
+        if (!this.user.phone) {
+          this.$store.commit(vuexTypes.APP_SHOW_TOAST, '未输入用名');
+          return false;
+        }
+        if (!this.user.password) {
+          this.$store.commit(vuexTypes.APP_SHOW_TOAST, '未输入密码');
+          return false;
+        }
+        return true;
       }
     }
   };

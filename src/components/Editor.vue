@@ -15,6 +15,7 @@
 
 <script type="text/ecmascript-6">
   import api from '../app/api';
+  import * as utils from '../utils/index';
 
   export default {
     watch: {
@@ -62,7 +63,7 @@
     methods: {
       submitData () {
         if (!this.$store.getters.userIsLogin) {
-          alert('未登入');
+          utils.toast('未登入');
           return;
         }
         if (this.verifyFormData()) {
@@ -75,15 +76,15 @@
       },
       verifyFormData () {
         if (!this.formData.title) {
-          alert('标题不能为空');
+          utils.toast('标题不能为空');
           return false;
         }
         if (!this.formData.des) {
-          alert('描述不能为空');
+          utils.toast('描述不能为空');
           return false;
         }
         if (!this.formData.content) {
-          alert('内容不能为空');
+          utils.toast('内容不能为空');
           return false;
         }
         return true;

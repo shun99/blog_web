@@ -1,17 +1,15 @@
 <template>
   <div class="article-vue">
-    <markdown :content="input"></markdown>
-    <more class="edit-wrapper" @item="item"></more>
+    <markdown :content="article.content"></markdown>
+    <more v-if="showMore" class="edit-wrapper" @item="item"></more>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import markdown from './base/MDPrase.vue';
-  //  import Router from 'vue-router';
   import more from './base/More.vue';
   import api from '../app/api';
-  import * as vuexTypes from '../store/vuex-types';
-  //  let router = new Router();
+  import * as utils from '../utils/index';
 
   export default {
     watch: {
@@ -21,27 +19,32 @@
         }
       }
     },
-    data () {
-      return {
-        input: ''
-      };
-    },
     created () {
       this.getArticle();
+    },
+    data () {
+      return {
+        article: Object
+      };
     },
     components: {
       markdown,
       more
     },
+    computed: {
+      showMore () {
+        return utils.article.userType(this.article.userId);
+      }
+    },
     methods: {
       getArticle () {
         let url = api.article_get + this.$route.params.id;
         this.$http.get(url).then(response => {
-          this.input = response.body.data.content;
-          this.$store.commit(vuexTypes.ARTICLE_INFO, response.body.data);
+          this.article = response.body.data;
         });
       },
       item (index) {
+        utils.article.waitEdit(this.article);
         this.$router.push({path: '/article/update'});
       }
     }

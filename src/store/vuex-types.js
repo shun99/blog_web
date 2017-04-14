@@ -14,9 +14,9 @@ export const ARTICLE_INFO = 'ARTICLE_INFO';
  * 用户信息
  */
 export const USER_INFO_UPDATE = 'USER_INFO_UPDATE';
+export const USER_SHOW_LOGIN = 'USER_SHOW_LOGIN';
 
 /**
  * app通用
  */
-export const USER_SHOW_LOGIN = 'USER_SHOW_LOGIN';
 export const APP_SHOW_TOAST = 'APP_SHOW_TOAST';

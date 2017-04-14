@@ -11,14 +11,11 @@
 <script type="text/ecmascript-6">
   import Dialog from '../base/Dialog.vue';
   import api from '../../app/api';
-  import * as vuexTypes from '../../store/vuex-types';
+  import * as utils from '../../utils/index';
   export default {
     data () {
       return {
-        user: {
-          phone: '',
-          password: ''
-        },
+        user: {},
         btnList: [
           {des: '登入'},
           {des: '取消'}
@@ -37,33 +34,33 @@
       clickBtn (index) {
         if (index === 0) {
           if (this.verifyLogin()) {
-            this.login();
+            this.goLogin();
           }
         } else {
-          this.$store.commit(vuexTypes.USER_SHOW_LOGIN, false);
+          utils.loginStatus(false);
         }
       },
-      login () {
+      goLogin () {
         this.$http.post(api.login, this.user)
           .then((response) => {
             if (response.body.code === 0) {
-              this.user.token = response.body.data.token;
-              this.$store.commit(vuexTypes.USER_INFO_UPDATE, this.user);
-              this.$store.commit(vuexTypes.APP_SHOW_TOAST, '登入成功');
-              this.$store.commit(vuexTypes.USER_SHOW_LOGIN, false);
+              this.user = response.body.data;
+              utils.toast('登入成功');
+              utils.loginStatus(false);
+              utils.user.save(this.user);
             } else {
-              this.$store.commit(vuexTypes.APP_SHOW_TOAST, '登入失败');
-              this.$store.commit(vuexTypes.USER_SHOW_LOGIN, false);
+              utils.toast('登入失败');
+              utils.loginStatus(false);
             }
           });
       },
       verifyLogin () {
         if (!this.user.phone) {
-          this.$store.commit(vuexTypes.APP_SHOW_TOAST, '未输入用名');
+          utils.toast('请输入手机');
           return false;
         }
         if (!this.user.password) {
-          this.$store.commit(vuexTypes.APP_SHOW_TOAST, '未输入密码');
+          utils.toast('请输入密码');
           return false;
         }
         return true;

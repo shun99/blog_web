@@ -11,10 +11,21 @@ const state = {
   }
 };
 
+let timerId;
+/**
+ * payload 是一个对象
+ * payload.interval 是 显示时间
+ * payload.msg 是消息
+ */
 const mutations = {
   [types.APP_SHOW_TOAST] (state, payload) {
+    let interval = payload.interval || 2000;
+    state.toast.msg = payload.msg || '提示';
     state.toast.show = true;
-    state.toast.msg = payload;
+    clearTimeout(timerId);
+    timerId = setTimeout(function () {
+      state.toast.show = false;
+    }, interval);
   }
 };
 

@@ -25,6 +25,11 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     //semicolon
     'semi': ['error', 'always'],
-    'indent': 0
+    'indent': 0,
+    "space-before-function-paren": ["error", {
+      "anonymous": "ignore",
+      "named": "ignore",
+      "asyncArrow": "ignore"
+    }],
   }
 }

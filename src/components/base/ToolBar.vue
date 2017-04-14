@@ -26,7 +26,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import * as vuexTypes from '../../store/vuex-types';
+  import * as utils from '../../utils/index';
 
   export default {
     data () {
@@ -50,7 +50,7 @@
       },
       jumpUserCenter () {
         if (!this.$store.getters.userIsLogin) {
-          this.$store.commit(vuexTypes.USER_SHOW_LOGIN, true);
+          utils.loginStatus(true);
         } else {
           this.$router.push({path: '/article/new'});
         }

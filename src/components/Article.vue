@@ -44,7 +44,7 @@
         });
       },
       item (index) {
-        utils.article.waitEdit(this.article);
+        utils.article.setEdit(this.article);
         this.$router.push({path: '/article/update'});
       }
     }

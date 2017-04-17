@@ -20,25 +20,15 @@
   export default {
     watch: {
       '$route' (to, from) {
-        if (this.$route.params.update) {
-          console.log(this.$store.state.article.entity);
-        }
+        this.initData();
       }
     },
     created () {
-      console.log('created...');
-      if (this.$route.params.update) {
-        console.log(this.$store.state.article.entity);
-      }
+      this.initData();
     },
     data () {
       return {
-        formData: {
-          title: '',
-          des: '',
-          content: '',
-          articleType: 1
-        },
+        formData: {},
         submitUrl: api.article_post,
         sortData: [
           {
@@ -61,15 +51,46 @@
       };
     },
     methods: {
+      initData () {
+        if (this.$route.fullPath === '/article/update') {
+          this.$nextTick(() => {
+            this.formData = this.$store.getters.getEditArticle;
+          });
+        } else if (this.$route.fullPath === '/article/new') {
+          this.formData = {};
+        }
+      },
       submitData () {
         if (!this.$store.getters.userIsLogin) {
           utils.toast('未登入');
           return;
         }
         if (this.verifyFormData()) {
-          this.$http.post(this.submitUrl, this.formData).then((response) => {
-          });
+          if (this.formData.id) {
+            this.putArticle();
+          } else {
+            this.postArticle();
+          }
         }
+      },
+      postArticle () {
+        this.$http.post(this.submitUrl, this.formData)
+          .then((response) => {
+            utils.toast('提交成功');
+            this.$router.push({path: '/home'});
+          })
+          .catch((e) => {
+            utils.toast('提交失败');
+          });
+      },
+      putArticle () {
+        this.$http.put(this.submitUrl, this.formData)
+          .then((response) => {
+            utils.toast('提交成功');
+            this.$router.push({path: '/home'});
+          }).catch((e) => {
+          utils.toast('提交失败');
+        });
       },
       goCheckItem (index) {
         this.formData.articleType = index;

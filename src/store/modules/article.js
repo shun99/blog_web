@@ -9,8 +9,14 @@ const state = {
   }
 };
 
+const getters = {
+  getEditArticle (state) {
+    return state.entity;
+  }
+};
+
 const mutations = {
-  [types.ARTICLE_INFO] (state, payload) {
+  [types.ARTICLE_EDIT_INFO] (state, payload) {
     // state 模块的局部状态
     state.entity = payload;
   }
@@ -18,5 +24,6 @@ const mutations = {
 
 export default {
   state,
-  mutations
+  mutations,
+  getters
 };

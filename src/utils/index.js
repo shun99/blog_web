@@ -29,8 +29,8 @@ export let user = {
   curUser: curUser
 };
 
-function waitEdit(article) {
-  store.commit(vuexTypes.ARTICLE_INFO, article);
+function setEditArticle(article) {
+  store.commit(vuexTypes.ARTICLE_EDIT_INFO, article);
 }
 
 function userType(userId) {
@@ -44,6 +44,6 @@ function userType(userId) {
 }
 
 export let article = {
-  waitEdit: waitEdit,
+  setEdit: setEditArticle,
   userType: userType
 };

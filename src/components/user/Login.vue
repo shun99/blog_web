@@ -12,6 +12,7 @@
   import Dialog from '../base/Dialog.vue';
   import api from '../../app/api';
   import * as utils from '../../utils/index';
+  import Md5 from 'md5';
   export default {
     data () {
       return {
@@ -41,10 +42,13 @@
         }
       },
       goLogin () {
+        this.user.password = Md5(this.user.password);
+        console.log(this.user.password);
         this.$http.post(api.login, this.user)
           .then((response) => {
             if (response.body.code === 0) {
-              this.user = response.body.data;
+              this.user.token = response.body.data.token;
+              this.user.uid = response.body.data.uid;
               utils.toast('登入成功');
               utils.loginStatus(false);
               utils.user.save(this.user);

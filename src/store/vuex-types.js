@@ -9,7 +9,7 @@
 /**
  * 文章信息
  */
-export const ARTICLE_INFO = 'ARTICLE_INFO';
+export const ARTICLE_EDIT_INFO = 'ARTICLE_EDIT_INFO';
 /**
  * 用户信息
  */

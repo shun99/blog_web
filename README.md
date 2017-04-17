@@ -237,3 +237,6 @@ export let StorageKey = {
 ```
 # vuex
 使用vuex传递数据，优化代码结构
+# 添加编辑文章
+- MD5加密
+- 用户缓存到session

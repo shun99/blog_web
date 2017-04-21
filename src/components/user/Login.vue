@@ -43,7 +43,6 @@
       },
       goLogin () {
         this.user.password = Md5(this.user.password);
-        console.log(this.user.password);
         this.$http.post(api.login, this.user)
           .then((response) => {
             if (response.body.code === 0) {

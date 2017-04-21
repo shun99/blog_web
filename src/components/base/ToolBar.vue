@@ -52,7 +52,7 @@
         if (!this.$store.getters.userIsLogin) {
           utils.loginStatus(true);
         } else {
-          this.$router.push({path: '/article/new'});
+          this.$router.push({path: '/user'});
         }
       }
     }

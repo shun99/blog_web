@@ -240,3 +240,24 @@ export let StorageKey = {
 # 添加编辑文章
 - MD5加密
 - 用户缓存到session
+# 图片预览
+```
+//html
+  <input class="input-none" type="file" ref="updateAvatar" @change="loadPic"/>
+//js
+  loadPic (e) {
+         let imgView = this.$refs.imgView;
+         if (e.target.files && e.target.files[0]) {
+           if (!/\/(?:jpeg|jpg|png)/i.test(e.target.files[0].type)) {
+             return;
+           }
+           let reader = new FileReader();
+           reader.onload = function (evt) {
+             imgView.src = evt.target.result;
+           };
+           reader.readAsDataURL(e.target.files[0]);
+         }
+       }
+```
+- 从change的事件中的target获取files。
+- reader.onload 的参数从读取到图片转码后的base64字符串

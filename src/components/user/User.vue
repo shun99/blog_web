@@ -1,14 +1,13 @@
 <template>
   <div class="vue-user">
     <div class="avatar-wrapper">
-      <img :src="image" class="avatar">
+      <img :src="localImage" class="avatar" ref="imgView">
       <span class="edit" @click="editAvatar">编辑</span>
       <input class="input-none" type="file" ref="updateAvatar" @change="loadPic"/>
     </div>
     <span class="user-item">一个很严肃的人</span>
     <span class="user-item">这家伙很懒O(∩_∩)O</span>
     <button class="app-btn-1" @click="createArticle()">创建新文章</button>
-    <input class="user-item" type="file"/>
   </div>
 </template>
 
@@ -16,7 +15,7 @@
   export default {
     data () {
       return {
-        image: ''
+        localImage: ''
       };
     },
     methods: {
@@ -27,8 +26,17 @@
         this.$refs.updateAvatar.click();
       },
       loadPic (e) {
-        this.image = this.$refs.updateAvatar.value;
-        console.log(this.image);
+        let imgView = this.$refs.imgView;
+        if (e.target.files && e.target.files[0]) {
+          if (!/\/(?:jpeg|jpg|png)/i.test(e.target.files[0].type)) {
+            return;
+          }
+          let reader = new FileReader();
+          reader.onload = function (evt) {
+            imgView.src = evt.target.result;
+          };
+          reader.readAsDataURL(e.target.files[0]);
+        }
       }
     }
   };

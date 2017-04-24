@@ -261,3 +261,6 @@ export let StorageKey = {
 ```
 - 从change的事件中的target获取files。
 - reader.onload 的参数从读取到图片转码后的base64字符串
+# 上传图片
+- 使用图片的base64
+- 校验用户身份

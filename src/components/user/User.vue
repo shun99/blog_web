@@ -1,7 +1,7 @@
 <template>
   <div class="vue-user">
     <div class="avatar-wrapper">
-      <img :src="localImage" class="avatar">
+      <img :src="avatar" class="avatar">
       <span class="edit" @click="editAvatar">编辑</span>
       <input class="input-none" type="file" ref="updateAvatar" @change="loadPic"/>
     </div>
@@ -13,11 +13,12 @@
 </template>
 
 <script type="text/ecmascript-6">
-  let uploadImage = '';
+  import api from '../../app/api';
+  import * as utils from '../../utils/index';
   export default {
     data () {
       return {
-        localImage: uploadImage
+        avatar: ''
       };
     },
     methods: {
@@ -35,13 +36,23 @@
           let reader = new FileReader();
           let vueObj = this;
           reader.onload = function (evt) {
-            vueObj.localImage = evt.target.result;
+            vueObj.avatar = evt.target.result;
           };
           reader.readAsDataURL(e.target.files[0]);
         }
       },
       uploadAvatar () {
-        console.log(this.localImage);
+        this.$http.post(api.avatar_upload, {avatar: this.avatar}, {
+          headers: {
+            uid: utils.user.curUser().uid,
+            token: utils.user.curUser().token
+          },
+          progress: function (event) {
+            console.log(event);
+          }
+        }).then((response) => {
+          console.log(response);
+        });
       }
     }
   };

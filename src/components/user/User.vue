@@ -18,7 +18,8 @@
   export default {
     data () {
       return {
-        avatar: ''
+        avatar: utils.user.curUser().avatar,
+        needUpload: false
       };
     },
     methods: {
@@ -37,21 +38,25 @@
           let vueObj = this;
           reader.onload = function (evt) {
             vueObj.avatar = evt.target.result;
+            vueObj.needUpload = true;
           };
           reader.readAsDataURL(e.target.files[0]);
         }
       },
       uploadAvatar () {
+        if (!this.needUpload) {
+          utils.toast('还未编辑头像');
+          return;
+        }
         this.$http.post(api.avatar_upload, {avatar: this.avatar}, {
           headers: {
             uid: utils.user.curUser().uid,
             token: utils.user.curUser().token
-          },
-          progress: function (event) {
-            console.log(event);
           }
         }).then((response) => {
+          this.needUpload = false;
           console.log(response);
+          utils.toast('上传成功');
         });
       }
     }

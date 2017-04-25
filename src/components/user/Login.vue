@@ -48,6 +48,7 @@
             if (response.body.code === 0) {
               this.user.token = response.body.data.token;
               this.user.uid = response.body.data.uid;
+              this.user.avatar = response.body.data.avatar;
               utils.toast('登入成功');
               utils.loginStatus(false);
               utils.user.save(this.user);

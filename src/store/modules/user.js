@@ -13,7 +13,8 @@ const state = {
   entity: {
     uid: '',
     phone: '',
-    token: ''
+    token: '',
+    avatar: ''
   },
   showLogin: false
 };
@@ -24,6 +25,7 @@ const mutations = {
     state.entity.phone = payload.phone;
     state.entity.token = payload.token;
     state.entity.uid = payload.uid;
+    state.entity.avatar = payload.avatar;
     saveToSession('userInfo', 'current_user', payload);
   },
   [types.USER_SHOW_LOGIN] (state, payload) {

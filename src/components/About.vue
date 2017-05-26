@@ -29,13 +29,11 @@
     color cornflowerblue
     .bot
       position: fixed
-      left: 250px
+      left: 0px
       z-index 1px
       background #ffffff
       bottom: 0px
       right: 0px
       height 60px
       z-index 0
-      @media only screen and (max-width: 640px)
-        display none
 </style>

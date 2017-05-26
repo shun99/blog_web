@@ -83,7 +83,7 @@
           font-size: 16px
           min-height 40px
           padding 10px 20px
-          background theme-color
+          background color_primary
           color: #fff;
         .modal-body
           font-size: 12px
@@ -94,7 +94,7 @@
           flex-direction row-reverse
           font-size: 12px
           .modal-default-button
-            background theme-color
+            background color_primary
             color #fff
             padding 2px 10px
             margin-right 10px

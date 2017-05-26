@@ -160,14 +160,14 @@
         background #fff
         border: 1px solid #f1f1f1
       .checked-sort
-        background theme-color
+        background color_primary
         border none
         color #fff
     .button
       width: 100%
       max-width: 300px
       padding 5px
-      background theme-color
+      background color_primary
       margin 10px 0px
       font-size 12px
       color #fff

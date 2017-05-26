@@ -46,6 +46,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  @import "../../assets/stylus/mixin.styl"
 
   .slide-enter-active, .slide-leave-active
     transition: all 0.2s linear
@@ -66,7 +67,7 @@
       padding: 0px 30px
       height: 50px
       width: 100%
-      background #0593d3
+      background color_primary
       @media only screen and (max-width: 640px)
         padding: 0px 10px
       .title-wrapper
@@ -76,19 +77,19 @@
         .name
           font-size: 20px
           font-weight: 200px
-          color: #fff
+          color: color_txt_nav
           @media only screen and (max-width: 640px)
             font-size: 14px
       .icon-github, .icon-menu
         font-size: 20px
-        color: #fff
+        color: color_txt_nav
         &.icon-menu
           display: none
           @media only screen and (max-width: 640px)
             display inline
       .name
         font-size: 14px
-        color: #fff
+        color: color_txt_nav
         margin-left: 6px
     .sidebar-wrapper
       position fixed

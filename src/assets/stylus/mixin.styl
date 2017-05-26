@@ -1,10 +1,17 @@
-border-color = #ddd
-theme-color = #298CE5
-bg-color = #f4f5f5
-txt-nav = #ffffff
+//需要引入mixin才能使用
+
+//app常用色值
+color_border = #ddd
+color_primary = #298CE5
+color_bg = #f4f5f5
+color_txt_nav = #ffffff
+color_txt_title = #333
+color_txt_content = #666
+color_txt_ps = #555
+color_txt_btn = #ffffff
 
 //定义一个函数
-border-1px($color = border-color)
+border-1px($color = color_border)
   position: relative
   &:before, &:after
     border-top: 1px solid $color
@@ -18,7 +25,7 @@ border-1px($color = border-color)
   &:after
     bottom: 0
 
-border-1px-bottom($color = border-color)
+border-1px-bottom($color = color_border)
   position: relative
   &:after
     display: block
@@ -29,7 +36,7 @@ border-1px-bottom($color = border-color)
     border-top: 1px solid $color
     content: ' '
 
-border-1px-top($color = border-color)
+border-1px-top($color = color_border)
   position: relative
   &:before
     display: block
@@ -43,21 +50,3 @@ border-1px-top($color = border-color)
 border-none-bottom()
   &:after
     display: none
-
-//自动选择图片大小
-bg-image($url)
-  background-image: url($url + "@2x.png")
-  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
-    background-image: url($url + "@3x.png")
-
-@media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)
-  .border-1px
-    &::after
-      -webkit-transform: scaleY(0.7)
-      transform: scaleY(0.7)
-
-@media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2)
-  .border-1px
-    &::after
-      -webkit-transform: scaleY(0.5)
-      transform: scaleY(0.5)

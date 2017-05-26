@@ -38,11 +38,11 @@
       justify-content: center
       align-items: center
       .title
-        color txt-nav
+        color color_txt_nav
         font-size 16px
       .item
         margin-left -30px
-        color txt-nav
+        color color_txt_nav
         font-size 14px
         margin-top 25px
 

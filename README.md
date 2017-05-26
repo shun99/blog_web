@@ -264,3 +264,4 @@ export let StorageKey = {
 # 上传图片
 - 使用图片的base64
 - 校验用户身份
+# 加入侧边栏

@@ -3,23 +3,15 @@
     <div class="header-wrapper">
       <div class="title-wrapper">
         <span class="icon iconfont icon-menu" @click="slideStatus()"></span>
-        <span class="name">{{owner.name}}</span>
-        <div class="menu-item-wrapper">
-          <div class="item-wrapper" v-for="(menuItem, index) in menuItemList">
-            <router-link class="title" :to="'/' + menuItem">{{menuItem}}</router-link>
-          </div>
-        </div>
+        <span class="name">一个很严肃的人</span>
       </div>
       <span class="icon iconfont icon-github" @click="jumpUserCenter()"></span>
     </div>
     <div v-show="showSlide" class="sidebar-wrapper">
       <div class="slide-bg" @click="slideStatus()"></div>
       <transition name="slide">
-        <div v-show="showSlide" class="slide-content-wrapper" @click="slideStatus()">
-          <div class="item-wrapper" v-for="(menuItem, index) in menuItemList">
-            <router-link class="title" :to="'/' + menuItem">{{menuItem}}</router-link>
-          </div>
-        </div>
+        <SlideBar div v-show="showSlide" class="slide-content-wrapper"
+                  @click="slideStatus()"></SlideBar>
       </transition>
     </div>
   </div>
@@ -27,6 +19,7 @@
 
 <script type="text/ecmascript-6">
   import * as utils from '../../utils/index';
+  import SlideBar from '../base/SlideBar.vue';
 
   export default {
     data () {
@@ -34,15 +27,8 @@
         showSlide: false
       };
     },
-    props: {
-      owner: {
-        type: Object,
-        default: {}
-      },
-      menuItemList: {
-        type: Array,
-        default: []
-      }
+    components: {
+      'SlideBar': SlideBar
     },
     methods: {
       slideStatus () {
@@ -62,7 +48,7 @@
 <style lang="stylus" rel="stylesheet/stylus">
 
   .slide-enter-active, .slide-leave-active
-    transition: all 0.5s linear
+    transition: all 0.2s linear
 
   .slide-enter, .slide-leave-active
     transform: translate3d(-100%, 0, 0)
@@ -93,16 +79,6 @@
           color: #fff
           @media only screen and (max-width: 640px)
             font-size: 14px
-        .menu-item-wrapper
-          display: block
-          @media only screen and (max-width: 640px)
-            display none
-          .item-wrapper
-            display: inline-block
-            margin-left: 20px
-            .title
-              font-size: 14px
-              color: #fff
       .icon-github, .icon-menu
         font-size: 20px
         color: #fff
@@ -127,22 +103,9 @@
         background-color: #000
         opacity: 0.4
       .slide-content-wrapper
-        position: absolute
-        display: flex
-        flex-direction: column
-        justify-content: center
-        left: 0px
-        top: 0px
-        bottom: 0px
-        max-width: 300px
-        width: 60%
-        background: #fff
-        .item-wrapper
-          display: flex
-          align-items: center
-          justify-content: center
-          height: 40px
-          .title
-            font-size: 14px
-            color: #000
+        position: fixed
+        top 0px
+        left 0px
+        height: 100%
+        width 220px
 </style>

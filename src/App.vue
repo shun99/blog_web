@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app-vue">
-    <ToolBar class="app-tool"></ToolBar>
-    <SlideBar class="app-slide"></SlideBar>
+    <tool-bar class="app-tool"></tool-bar>
+    <slide-bar class="app-slide"></slide-bar>
     <keep-alive>
       <router-view class="app-content-wrapper"></router-view>
     </keep-alive>
@@ -19,8 +19,8 @@
 
   export default {
     components: {
-      'SlideBar': SlideBar,
-      'ToolBar': ToolBar,
+      'slide-bar': SlideBar,
+      'tool-bar': ToolBar,
       'login': Login,
       'toast': Toast
     }

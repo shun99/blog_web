@@ -4,7 +4,7 @@
       <div class="title">一个很严肃的人</div>
       <router-link to="/home" class="item">首页</router-link>
       <router-link to="/Android" class="item">归档</router-link>
-      <router-link to="/Node" class="item">标签</router-link>
+      <router-link to="/tag" class="item">标签</router-link>
       <router-link to="/about" class="item">关于</router-link>
     </div>
   </div>

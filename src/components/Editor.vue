@@ -4,10 +4,10 @@
     <textarea class="item des" placeholder="描述" v-model="formData.des"></textarea>
     <textarea class="item content" placeholder="内容" v-model="formData.content"></textarea>
     <div class="sort-wrapper">
-      <span class="sort-title">分类:</span>
-      <span class="sort-content" v-for="(sort, index) in sortData"
-            :class="{'checked-sort': sort.type === formData.articleType}"
-            @click="goCheckItem(sort.type)">{{sort.des}}</span>
+      <span class="sort-title">标签:</span>
+      <span class="sort-content" v-for="(tag, index) in tagList"
+            :class="{'checked-sort': tag.type === formData.articleType}"
+            @click="goCheckItem(sort.type)">{{tag.des}}</span>
     </div>
     <button class="button" @click="submitData()">提交</button>
   </div>
@@ -16,6 +16,7 @@
 <script type="text/ecmascript-6">
   import api from '../app/api';
   import * as utils from '../utils/index';
+  import {tagList} from '../app/constant';
 
   export default {
     watch: {
@@ -30,24 +31,7 @@
       return {
         formData: {},
         submitUrl: api.article_post,
-        sortData: [
-          {
-            des: 'android',
-            type: 1
-          },
-          {
-            des: 'web',
-            type: 2
-          },
-          {
-            des: 'node',
-            type: 3
-          },
-          {
-            des: 'life',
-            type: 4
-          }
-        ]
+        tagList: tagList
       };
     },
     methods: {

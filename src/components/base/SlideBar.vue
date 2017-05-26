@@ -1,18 +1,23 @@
 <template>
-  <div class="slide-bar-vue">
+  <div class="slide-bar-vue" @click="clickItem">
     <div class="menu-wrapper">
       <div class="title">一个很严肃的人</div>
-      <div class="item">归档</div>
-      <div class="item">首页</div>
-      <div class="item">标签</div>
-      <div class="item">关于</div>
+      <router-link to="/home" class="item">首页</router-link>
+      <router-link to="/Android" class="item">归档</router-link>
+      <router-link to="/Node" class="item">标签</router-link>
+      <router-link to="/about" class="item">关于</router-link>
     </div>
   </div>
-
 </template>
 
 <script type="text/ecmascript-6">
-  export default {};
+  export default {
+    methods: {
+      clickItem () {
+        this.$emit('clickSlide');
+      }
+    }
+  };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="app-vue">
-    <ToolBar class="app-tool" :owner="owner" :menuItemList="menuItemList"></ToolBar>
+    <ToolBar class="app-tool"></ToolBar>
     <SlideBar class="app-slide"></SlideBar>
     <keep-alive>
       <router-view class="app-content-wrapper"></router-view>

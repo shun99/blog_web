@@ -11,7 +11,7 @@
       <div class="slide-bg" @click="slideStatus()"></div>
       <transition name="slide">
         <SlideBar div v-show="showSlide" class="slide-content-wrapper"
-                  @click="slideStatus()"></SlideBar>
+                  @click="slideStatus()" @clickSlide="slideStatus"></SlideBar>
       </transition>
     </div>
   </div>

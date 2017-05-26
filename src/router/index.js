@@ -18,7 +18,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/Home',
+      path: '/home',
       component: Home
     },
     {
@@ -46,7 +46,7 @@ export default new Router({
       component: Article
     },
     {
-      path: '/About',
+      path: '/about',
       component: About
     },
     {

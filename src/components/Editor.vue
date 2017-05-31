@@ -1,5 +1,9 @@
 <template>
   <div class="editor-vue">
+    <div class="pic-pos">
+      <span class="app-btn-1" @click="insertPic()">插入图片</span>
+      <input class="input-none" type="file" ref="inputPic" @change="loadPic"/>
+    </div>
     <textarea class="item title" placeholder="标题" type="title" v-model="formData.title"></textarea>
     <textarea class="item des" placeholder="描述" v-model="formData.des"></textarea>
     <textarea class="item content" placeholder="内容" v-model="formData.content"></textarea>
@@ -30,7 +34,6 @@
     data () {
       return {
         formData: {},
-        submitUrl: api.article_post,
         tagList: tagList
       };
     },
@@ -58,20 +61,40 @@
         }
       },
       postArticle () {
-        this.$http.post(this.submitUrl, this.formData)
+        this.$http
+          .post(api.article_post, this.formData, {
+            headers: {
+              uid: utils.user.curUser().uid,
+              token: utils.user.curUser().token
+            }
+          })
           .then((response) => {
-            utils.toast('提交成功');
-            this.$router.push({path: '/home'});
+            if (response.body.code === 0) {
+              utils.toast('提交成功');
+              this.$router.push({path: '/home'});
+            } else {
+              utils.toast(response.body.msg);
+            }
           })
           .catch((e) => {
             utils.toast('提交失败');
           });
       },
       putArticle () {
-        this.$http.put(this.submitUrl, this.formData)
+        this.$http
+          .put(api.article_put, this.formData, {
+            headers: {
+              uid: utils.user.curUser().uid,
+              token: utils.user.curUser().token
+            }
+          })
           .then((response) => {
-            utils.toast('提交成功');
-            this.$router.push({path: '/home'});
+            if (response.body.code === 0) {
+              utils.toast('修改成功');
+              this.$router.push({path: '/home'});
+            } else {
+              utils.toast(response.body.msg);
+            }
           }).catch((e) => {
           utils.toast('提交失败');
         });
@@ -93,6 +116,36 @@
           return false;
         }
         return true;
+      },
+      insertPic () {
+        if (!this.$store.getters.userIsLogin) {
+          utils.loginStatus(true);
+        } else {
+          this.$refs.inputPic.click();
+        }
+      },
+      loadPic (e) {
+        if (e.target.files && e.target.files[0]) {
+          if (!/\/(?:jpeg|jpg|png)/i.test(e.target.files[0].type)) {
+            return;
+          }
+          let pic = new FormData();
+          pic.append('pic', e.target.files[0]);
+          this.$http.post(api.article_pic_post, pic, {
+            headers: {
+              uid: utils.user.curUser().uid,
+              token: utils.user.curUser().token
+            }
+          }).then((response) => {
+            if (response.body.code === 0) {
+              let conTemp = '![name](' + response.body.data + ')';
+              if (this.formData.content) {
+                conTemp = this.formData.content + '\n' + conTemp;
+              }
+              this.$set(this.formData, 'content', conTemp);
+            }
+          });
+        }
       }
     }
   };
@@ -160,4 +213,9 @@
       border: none;
       outline: none;
 
+  .pic-pos
+    width: 100%
+    margin-top: 10px
+    .input-none
+      display none
 </style>

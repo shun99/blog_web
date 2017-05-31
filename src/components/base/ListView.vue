@@ -3,10 +3,10 @@
     <ul>
       <li class="item-wrapper border-1px" v-for="(item, index) in itemList">
         <div class="title-wrapper">
-          <router-link class="title-1" :to="'/article/' + item.id">{{item.title}}</router-link>
+          <router-link class="app-title-1" :to="'/article/' + item.id">{{item.title}}</router-link>
         </div>
         <div class="content-wrapper">
-          <p class="content-1">{{item.des}}</p>
+          <p class="app-content-1">{{item.des}}</p>
         </div>
         <div class="time-wrapper"><span class="time-1">2016.10.21</span></div>
       </li>

@@ -2,11 +2,11 @@
   <div class="bot-vue">
     <span class="border-1px"></span>
     <p>
-      <span class="content-1">©2017-一个很严肃的人-</span>
+      <span class="app-content-1">©2017-一个很严肃的人-</span>
       <a class="app-a" href="">博客源码</a>
     </p>
     <p class="content">
-      <span class="content-1">Powered by </span> <a class="app-a">Vue2</a>
+      <span class="app-content-1">Powered by </span> <a class="app-a">Vue2</a>
       <span>&</span><a class="app-a"> Koa2</a>
     </p>
   </div>

@@ -7,11 +7,14 @@ let login = baseUrl + 'login';
 let article = baseUrl + 'article';
 let list = baseUrl + 'list?type=';
 let avatar = baseUrl + 'avatar';
+let articlePic = baseUrl + 'article_pic';
 
 module.exports = {
   login: login,
   article_post: article,
+  article_put: article,
   article_get: article + '?id=',
+  article_pic_post: articlePic,
   home: list + '0',
   android: list + '1',
   node: list + '2',

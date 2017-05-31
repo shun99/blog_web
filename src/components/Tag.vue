@@ -1,6 +1,6 @@
 <template>
   <div class="tag-vue">
-    <div class="title-1">标签</div>
+    <div class="app-title-1">标签</div>
     <div class="tag-wrapper">
       <span class="tag" v-for="(tag, index) in tagList">{{tag.des}}</span>
     </div>

@@ -8,6 +8,7 @@
     <span class="user-item">一个很严肃的人</span>
     <span class="user-item">这家伙很懒O(∩_∩)O</span>
     <button class="app-btn-1" @click="uploadAvatar()">提交头像</button>
+    <button class="app-btn-1" @click="uploadAvatar_file()">提交头像</button>
     <button class="app-btn-1" @click="createArticle()">创建新文章</button>
   </div>
 </template>
@@ -19,15 +20,24 @@
     data () {
       return {
         avatar: utils.user.curUser().avatar,
-        needUpload: false
+        needUpload: false,
+        data: new FormData()
       };
     },
     methods: {
       createArticle () {
-        this.$router.push({path: '/article/new'});
+        if (!this.$store.getters.userIsLogin) {
+          utils.loginStatus(true);
+        } else {
+          this.$router.push({path: '/article/new'});
+        }
       },
       editAvatar () {
-        this.$refs.updateAvatar.click();
+        if (!this.$store.getters.userIsLogin) {
+          utils.loginStatus(true);
+        } else {
+          this.$refs.updateAvatar.click();
+        }
       },
       loadPic (e) {
         if (e.target.files && e.target.files[0]) {
@@ -41,6 +51,7 @@
             vueObj.needUpload = true;
           };
           reader.readAsDataURL(e.target.files[0]);
+          this.data.append('avatar', e.target.files[0]);
         }
       },
       uploadAvatar () {
@@ -49,6 +60,22 @@
           return;
         }
         this.$http.post(api.avatar_upload, {avatar: this.avatar}, {
+          headers: {
+            uid: utils.user.curUser().uid,
+            token: utils.user.curUser().token
+          }
+        }).then((response) => {
+          this.needUpload = false;
+          console.log(response);
+          utils.toast('上传成功');
+        });
+      },
+      uploadAvatar_file () {
+        if (!this.needUpload) {
+          utils.toast('还未编辑头像');
+          return;
+        }
+        this.$http.post(api.avatar_upload, this.data, {
           headers: {
             uid: utils.user.curUser().uid,
             token: utils.user.curUser().token

@@ -5,7 +5,7 @@
       <input class="input-none" type="file" ref="inputPic" @change="uploadPic"/>
     </div>
     <textarea class="item title" placeholder="标题" type="title" v-model="formData.title"></textarea>
-    <textarea class="item des" placeholder="描述" v-model="formData.des"></textarea>
+    <!--<textarea class="item des" placeholder="描述" v-model="formData.des"></textarea>-->
     <textarea class="item content" placeholder="内容" v-model="formData.content"></textarea>
     <div class="sort-wrapper">
       <span class="sort-title">标签:</span>
@@ -104,17 +104,23 @@
         this.formData.articleType = index;
       },
       verifyFormData () {
-        if (!this.formData.title) {
-          utils.toast('标题不能为空');
-          return false;
-        }
-        if (!this.formData.des) {
-          utils.toast('描述不能为空');
-          return false;
-        }
         if (!this.formData.content) {
           utils.toast('内容不能为空');
           return false;
+        }
+        if (!this.formData.title) {
+          let end = this.formData.content.indexOf('\n');
+          this.formData.des = this.formData.content.substring(end, end + 50).replace('#', '');
+          end = end > 30 ? 30 : end;
+          this.formData.title = this.formData.content.substring(0, end);
+          this.formData.title = this.formData.title.replace('#', '');
+        } else {
+          this.formData.des = this.formData.content.substring(0, 50).replace('#', '');
+          let desEnd = this.formData.des.indexOf('![');
+          console.log('desEnd' + desEnd);
+          if (desEnd > 0) {
+            this.formData.des = this.formData.des.substring(0, desEnd);
+          }
         }
         return true;
       },
@@ -144,6 +150,7 @@
                 conTemp = this.formData.content + '\n' + conTemp;
               }
               this.$set(this.formData, 'content', conTemp);
+              console.log(this.formData.content);
             }
           });
         }

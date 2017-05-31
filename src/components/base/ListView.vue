@@ -6,7 +6,8 @@
           <router-link class="app-title-1" :to="'/article/' + item.id">{{item.title}}</router-link>
         </div>
         <div class="content-wrapper">
-          <p class="app-content-1">{{item.des}}</p>
+          <markdown class="app-content-1" :content="item.des"></markdown>
+          <!--<p class="app-content-1">{{item.des}}</p>-->
         </div>
         <div class="time-wrapper"><span class="time-1">2016.10.21</span></div>
       </li>
@@ -24,6 +25,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import markdown from './MDView.vue';
   export default {
     data () {
       return {
@@ -68,6 +70,9 @@
       showMore () {
         return this.listData.haveMore && this.itemList.length > 0;
       }
+    },
+    components: {
+      markdown
     }
   };
 </script>

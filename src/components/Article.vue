@@ -6,7 +6,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import markdown from './base/MDPrase.vue';
+  import markdown from './base/MDView.vue';
   import more from './base/More.vue';
   import api from '../app/api';
   import * as utils from '../utils/index';
@@ -58,6 +58,7 @@
     vertical-align: top
     box-sizing: border-box
     font-size: 14px
+    padding 10px
     overflow: auto
     .edit-wrapper
       position fixed

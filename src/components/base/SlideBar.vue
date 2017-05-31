@@ -32,6 +32,8 @@
     background-repeat: no-repeat
     background-size: cover
     overflow: auto
+    font-family: Helvetica Neue, Arial, Hiragino Sans GB, STHeiti, Microsoft YaHei
+    -webkit-font-smoothing: antialiased;
     .menu-wrapper
       display: flex
       flex-direction: column
@@ -39,11 +41,11 @@
       align-items: center
       .title
         color color_txt_nav
-        font-size 16px
+        font-size 18px
       .item
         margin-left -30px
         color color_txt_nav
-        font-size 14px
+        font-size 16px
         margin-top 25px
 
 </style>

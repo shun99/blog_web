@@ -8,10 +8,10 @@
     <!--<textarea class="item des" placeholder="描述" v-model="formData.des"></textarea>-->
     <textarea class="item content" placeholder="内容" v-model="formData.content"></textarea>
     <div class="sort-wrapper">
-      <span class="sort-title">标签:</span>
+      <span class="sort-title">分类:</span>
       <span class="sort-content" v-for="(tag, index) in tagList"
             :class="{'checked-sort': tag.type === formData.articleType}"
-            @click="goCheckItem(sort.type)">{{tag.des}}</span>
+            @click="goCheckItem(tag.type)">{{tag.des}}</span>
     </div>
     <button class="button" @click="submitData()">提交</button>
   </div>
@@ -117,7 +117,6 @@
         } else {
           this.formData.des = this.formData.content.substring(0, 50).replace('#', '');
           let desEnd = this.formData.des.indexOf('![');
-          console.log('desEnd' + desEnd);
           if (desEnd > 0) {
             this.formData.des = this.formData.des.substring(0, desEnd);
           }
@@ -150,7 +149,6 @@
                 conTemp = this.formData.content + '\n' + conTemp;
               }
               this.$set(this.formData, 'content', conTemp);
-              console.log(this.formData.content);
             }
           });
         }

@@ -34,7 +34,7 @@ function setEditArticle(article) {
 }
 
 function userType(userId) {
-  if (!curUser().uid || !userId) {
+  if (!curUser() || !curUser().uid || !userId) {
     return 0;
   } else if (curUser().uid === userId) {
     return 1;

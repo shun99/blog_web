@@ -38,19 +38,20 @@ const getters = {
    * 用户是否登入
    * 当entity是{}，entity改变，不能触发
    */
-  userIsLogin (state) {
-    if (!state.entity.token || !state.entity.uid) {
+  curUser (state) {
+    if (!state.entity.token || !state.entity.uid || !state.entity.phone) {
       let userInfo = loadFromSession('userInfo', 'current_user', '');
       state.entity.phone = userInfo.phone;
       state.entity.token = userInfo.token;
       state.entity.uid = userInfo.uid;
-      if (!state.entity.token || !state.entity.uid) {
-        return false;
+      state.entity.avatar = userInfo.avatar;
+      if (!state.entity.token || !state.entity.uid || !state.entity.phone) {
+        return null;
       } else {
-        return true;
+        return state.entity;
       }
     } else {
-      return true;
+      return state.entity;
     }
   }
 };

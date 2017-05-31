@@ -21,7 +21,7 @@ function saveUser(user) {
 }
 
 function curUser() {
-  return store.state.user.entity;
+  return store.getters.curUser;
 }
 
 export let user = {

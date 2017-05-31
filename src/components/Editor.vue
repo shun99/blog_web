@@ -2,7 +2,7 @@
   <div class="editor-vue">
     <div class="pic-pos">
       <span class="app-btn-1" @click="insertPic()">插入图片</span>
-      <input class="input-none" type="file" ref="inputPic" @change="loadPic"/>
+      <input class="input-none" type="file" ref="inputPic" @change="uploadPic"/>
     </div>
     <textarea class="item title" placeholder="标题" type="title" v-model="formData.title"></textarea>
     <textarea class="item des" placeholder="描述" v-model="formData.des"></textarea>
@@ -48,7 +48,7 @@
         }
       },
       submitData () {
-        if (!this.$store.getters.userIsLogin) {
+        if (!this.$store.getters.curUser) {
           utils.toast('未登入');
           return;
         }
@@ -64,8 +64,8 @@
         this.$http
           .post(api.article_post, this.formData, {
             headers: {
-              uid: utils.user.curUser().uid,
-              token: utils.user.curUser().token
+              uid: this.$store.getters.curUser.uid,
+              token: this.$store.getters.curUser.token
             }
           })
           .then((response) => {
@@ -95,9 +95,10 @@
             } else {
               utils.toast(response.body.msg);
             }
-          }).catch((e) => {
-          utils.toast('提交失败');
-        });
+          })
+          .catch((e) => {
+            utils.toast('提交失败');
+          });
       },
       goCheckItem (index) {
         this.formData.articleType = index;
@@ -118,19 +119,19 @@
         return true;
       },
       insertPic () {
-        if (!this.$store.getters.userIsLogin) {
+        if (!this.$store.getters.curUser) {
           utils.loginStatus(true);
         } else {
           this.$refs.inputPic.click();
         }
       },
-      loadPic (e) {
+      uploadPic (e) {
         if (e.target.files && e.target.files[0]) {
           if (!/\/(?:jpeg|jpg|png)/i.test(e.target.files[0].type)) {
             return;
           }
           let pic = new FormData();
-          pic.append('pic', e.target.files[0]);
+          pic.append('file', e.target.files[0]);
           this.$http.post(api.article_pic_post, pic, {
             headers: {
               uid: utils.user.curUser().uid,

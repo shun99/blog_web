@@ -35,7 +35,7 @@
         this.showSlide = !this.showSlide;
       },
       jumpUserCenter () {
-        if (!this.$store.getters.userIsLogin) {
+        if (!this.$store.getters.curUser) {
           utils.loginStatus(true);
         } else {
           this.$router.push({path: '/user'});

@@ -16,7 +16,7 @@
       <!--<div class="page-control"><span>博客归档</span></div>-->
       <!--<div class="page-control"><span>下一页</span></div>-->
       <div class="page-control">
-        <span v-if="listData.haveMore" @click="loadData()">加载更多</span>
+        <span v-if="showMore" @click="loadData()">加载更多</span>
         <span v-else>已经到底部</span>
       </div>
     </div>
@@ -62,6 +62,11 @@
               this.itemList.push(rating);
             });
           });
+      }
+    },
+    computed: {
+      showMore () {
+        return this.listData.haveMore && this.itemList.length > 0;
       }
     }
   };

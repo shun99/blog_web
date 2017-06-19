@@ -25,14 +25,14 @@
     },
     methods: {
       createArticle () {
-        if (!this.$store.getters.curUser) {
+        if (!this.$store.getters.isLogin) {
           utils.loginStatus(true);
         } else {
           this.$router.push({path: '/article/new'});
         }
       },
       editAvatar () {
-        if (!this.$store.getters.curUser) {
+        if (!this.$store.getters.isLogin) {
           utils.loginStatus(true);
         } else {
           this.$refs.updateAvatar.click();
@@ -61,8 +61,8 @@
         this.$http
           .put(api.avatar_upload, this.data, {
             headers: {
-              uid: utils.user.curUser().uid,
-              token: utils.user.curUser().token
+              uid: this.$store.getters.isLogin.uid,
+              token: this.$store.getters.isLogin.token
             }
           })
           .then((response) => {

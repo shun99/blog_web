@@ -21,47 +21,7 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 var proxyTable = config.dev.proxyTable
 
 var app = express()
-var appData = require('../data.json')
-var seller = appData.seller
-var ratings = appData.ratings
-var fs = require('fs');
-var path = require('path');
 
-var apiRoutes = express.Router()
-
-var filePath = path.join(__dirname, "..", 'README.md')
-var mdData;
-fs.readFile(filePath, {flag: 'r+', encoding: 'utf8'}, function (err, data) {
-  if (err) {
-    console.error(err);
-    return;
-  }
-  mdData = data;
-});
-
-
-apiRoutes.get('/seller', function (req, res) {
-  res.json({
-    errNo: 0,
-    data: seller
-  });
-})
-
-apiRoutes.get('/ratings', function (req, res) {
-  res.json({
-    errNo: 0,
-    data: ratings
-  });
-})
-
-apiRoutes.get('/makedown', function (req, res) {
-  res.json({
-    errNo: 0,
-    data: {mdData}
-  });
-})
-
-app.use('/api', apiRoutes)
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {

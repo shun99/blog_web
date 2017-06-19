@@ -33,7 +33,14 @@
     },
     computed: {
       showMore () {
-        return utils.article.userType(this.article.userId);
+        let user = this.$store.getters.isLogin;
+        if (!user || !user.uid) {
+          return 0;
+        } else if (user.uid === this.article.userId) {
+          return 1;
+        } else {
+          return 0;
+        }
       }
     },
     methods: {

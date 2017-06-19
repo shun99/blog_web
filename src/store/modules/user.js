@@ -21,7 +21,7 @@ const state = {
 
 const mutations = {
   [types.USER_INFO_UPDATE] (state, payload) {
-    console.log('update_info' + payload.uid);
+    console.log('update_info' + payload);
     state.entity.phone = payload.phone;
     state.entity.token = payload.token;
     state.entity.uid = payload.uid;
@@ -38,7 +38,7 @@ const getters = {
    * 用户是否登入
    * 当entity是{}，entity改变，不能触发
    */
-  curUser (state) {
+  isLogin (state) {
     if (!state.entity.token || !state.entity.uid || !state.entity.phone) {
       let userInfo = loadFromSession('userInfo', 'current_user', '');
       state.entity.phone = userInfo.phone;
@@ -53,6 +53,16 @@ const getters = {
     } else {
       return state.entity;
     }
+  },
+  curUser (state) {
+    if (!state.entity.token || !state.entity.uid || !state.entity.phone) {
+      let userInfo = loadFromSession('userInfo', 'current_user', '');
+      state.entity.phone = userInfo.phone;
+      state.entity.token = userInfo.token;
+      state.entity.uid = userInfo.uid;
+      state.entity.avatar = userInfo.avatar;
+    }
+    return state.entity;
   }
 };
 

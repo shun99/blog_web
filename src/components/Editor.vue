@@ -48,7 +48,7 @@
         }
       },
       submitData () {
-        if (!this.$store.getters.curUser) {
+        if (!this.$store.getters.isLogin) {
           utils.toast('未登入');
           return;
         }
@@ -64,8 +64,8 @@
         this.$http
           .post(api.article_post, this.formData, {
             headers: {
-              uid: this.$store.getters.curUser.uid,
-              token: this.$store.getters.curUser.token
+              uid: this.$store.getters.isLogin.uid,
+              token: this.$store.getters.isLogin.token
             }
           })
           .then((response) => {
@@ -84,8 +84,8 @@
         this.$http
           .put(api.article_put, this.formData, {
             headers: {
-              uid: utils.user.curUser().uid,
-              token: utils.user.curUser().token
+              uid: this.$store.getters.isLogin.uid,
+              token: this.$store.getters.isLogin.token
             }
           })
           .then((response) => {
@@ -124,7 +124,7 @@
         return true;
       },
       insertPic () {
-        if (!this.$store.getters.curUser) {
+        if (!this.$store.getters.isLogin) {
           utils.loginStatus(true);
         } else {
           this.$refs.inputPic.click();
@@ -139,8 +139,8 @@
           pic.append('file', e.target.files[0]);
           this.$http.post(api.article_pic_post, pic, {
             headers: {
-              uid: utils.user.curUser().uid,
-              token: utils.user.curUser().token
+              uid: this.$store.getters.isLogin.uid,
+              token: this.$store.getters.isLogin.token
             }
           }).then((response) => {
             if (response.body.code === 0) {

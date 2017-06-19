@@ -20,30 +20,14 @@ function saveUser(user) {
   store.commit(vuexTypes.USER_INFO_UPDATE, user);
 }
 
-function curUser() {
-  return store.getters.curUser;
-}
-
 export let user = {
-  save: saveUser,
-  curUser: curUser
+  save: saveUser
 };
 
 function setEditArticle(article) {
   store.commit(vuexTypes.ARTICLE_EDIT_INFO, article);
 }
 
-function userType(userId) {
-  if (!curUser() || !curUser().uid || !userId) {
-    return 0;
-  } else if (curUser().uid === userId) {
-    return 1;
-  } else {
-    return 0;
-  }
-}
-
 export let article = {
-  setEdit: setEditArticle,
-  userType: userType
+  setEdit: setEditArticle
 };

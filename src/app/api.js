@@ -2,7 +2,8 @@
  * Created by yghysdr on 2017/4/12.
  * api 接口
  */
-let baseUrl = 'http://192.168.11.148:3000/api/';
+
+let baseUrl = 'http://www.yghysdr.cn/api/';
 let login = baseUrl + 'login';
 let article = baseUrl + 'article';
 let list = baseUrl + 'list?type=';

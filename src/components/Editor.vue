@@ -118,9 +118,9 @@
         this.formData.des = content.substring(titleEnd, desEnd);
         this.formData.des = this.formData.des.replace('des:', '');
 
-        this.formData.content = content.replace('title:', '');
-        this.formData.content = content.replace('des:', '');
-        this.formData.content = content.replace('content:', '');
+        this.formData.content = this.formData.content.replace('title:', '');
+        this.formData.content = this.formData.content.replace('des:', '');
+        this.formData.content = this.formData.content.replace('content:', '');
         return true;
       },
       insertPic () {

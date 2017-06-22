@@ -4,11 +4,11 @@
       <span class="app-btn-1" @click="insertPic()">插入图片</span>
       <input class="input-none" type="file" ref="inputPic" @change="uploadPic"/>
     </div>
-    <textarea class="item title" placeholder="标题" type="title" v-model="formData.title"></textarea>
+    <!--<textarea class="item title" placeholder="标题" type="title" v-model="formData.title"></textarea>-->
     <!--<textarea class="item des" placeholder="描述" v-model="formData.des"></textarea>-->
-    <textarea class="item content" placeholder="内容" v-model="formData.content"></textarea>
+    <textarea class="item content" placeholder="文章" v-model="formData.content"></textarea>
     <div class="sort-wrapper">
-      <span class="sort-title">分类:</span>
+      <span class="sort-title">标签:</span>
       <span class="sort-content" v-for="(tag, index) in tagList"
             :class="{'checked-sort': tag.type === formData.articleType}"
             @click="goCheckItem(tag.type)">{{tag.des}}</span>
@@ -108,19 +108,19 @@
           utils.toast('内容不能为空');
           return false;
         }
-        if (!this.formData.title) {
-          let end = this.formData.content.indexOf('\n');
-          this.formData.des = this.formData.content.substring(end, end + 50).replace('#', '');
-          end = end > 30 ? 30 : end;
-          this.formData.title = this.formData.content.substring(0, end);
-          this.formData.title = this.formData.title.replace('#', '');
-        } else {
-          this.formData.des = this.formData.content.substring(0, 50).replace('#', '');
-          let desEnd = this.formData.des.indexOf('![');
-          if (desEnd > 0) {
-            this.formData.des = this.formData.des.substring(0, desEnd);
-          }
-        }
+        let content = this.formData.content;
+
+        let titleEnd = content.indexOf('des:');
+        this.formData.title = content.substring(0, titleEnd);
+        this.formData.title = this.formData.title.replace('title:', '');
+
+        let desEnd = content.indexOf('content:');
+        this.formData.des = content.substring(titleEnd, desEnd);
+        this.formData.des = this.formData.des.replace('des:', '');
+
+        this.formData.content = content.replace('title:', '');
+        this.formData.content = content.replace('des:', '');
+        this.formData.content = content.replace('content:', '');
         return true;
       },
       insertPic () {

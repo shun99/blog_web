@@ -1,6 +1,7 @@
 <template>
   <div class="slide-bar-vue" @click="clickItem">
     <div class="menu-wrapper">
+      <img src="http://blog.yghysdr.cn/image/avatar.ico" width="60px" height="60px">
       <div class="title">一个很严肃的人</div>
       <router-link to="/home" class="item">首页</router-link>
       <router-link to="/Android" class="item">归档</router-link>
@@ -26,8 +27,7 @@
   .slide-bar-vue
     display: flex
     justify-content: center
-    align-items: center
-    background-image: url('/static/sidebar.webp')
+    background-color: color_slide
     background-position: 0
     background-repeat: no-repeat
     background-size: cover
@@ -37,13 +37,14 @@
     .menu-wrapper
       display: flex
       flex-direction: column
-      justify-content: center
       align-items: center
+      margin-top 25%
       .title
         color color_txt_nav
-        font-size 18px
+        font-size 14px
+        margin-top 25px
       .item
-        margin-left -30px
+        margin-left -10px
         color color_txt_nav
         font-size 16px
         margin-top 25px

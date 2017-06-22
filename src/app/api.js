@@ -4,6 +4,7 @@
  */
 
 let baseUrl = 'http://www.yghysdr.cn/api/';
+// let baseUrl = 'http://192.168.11.148:3000/api/';
 let login = baseUrl + 'login';
 let article = baseUrl + 'article';
 let list = baseUrl + 'list?type=';

@@ -5,7 +5,6 @@
         <span class="icon iconfont icon-menu" @click="slideStatus()"></span>
         <span class="name">一个很严肃的人</span>
       </div>
-      <span class="icon iconfont icon-github" @click="jumpUserCenter()"></span>
     </div>
     <div v-show="showSlide" class="sidebar-wrapper">
       <div class="slide-bg" @click="slideStatus()"></div>
@@ -18,7 +17,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import * as utils from '../../utils/index';
   import SlideBar from '../base/SlideBar.vue';
 
   export default {
@@ -33,13 +31,6 @@
     methods: {
       slideStatus () {
         this.showSlide = !this.showSlide;
-      },
-      jumpUserCenter () {
-        if (!this.$store.getters.isLogin) {
-          utils.loginStatus(true);
-        } else {
-          this.$router.push({path: '/user'});
-        }
       }
     }
   };

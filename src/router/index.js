@@ -7,7 +7,6 @@ import Node from '@/components/Node';
 import Article from '@/components/Article';
 import About from '@/components/About';
 import Editor from '@/components/Editor';
-import User from '@/components/user/User';
 import Tag from '@/components/Tag';
 
 Vue.use(Router);
@@ -49,10 +48,6 @@ export default new Router({
     {
       path: '/about',
       component: About
-    },
-    {
-      path: '/user',
-      component: User
     },
     {
       path: '/tag',

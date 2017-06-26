@@ -4,7 +4,7 @@
       <img src="http://blog.yghysdr.cn/image/avatar.ico" width="60px" height="60px">
       <div class="title">一个很严肃的人</div>
       <router-link to="/home" class="item">首页</router-link>
-      <router-link to="/Android" class="item">归档</router-link>
+      <router-link to="/archive" class="item">归档</router-link>
       <router-link to="/tag" class="item">标签</router-link>
       <router-link to="/about" class="item">关于</router-link>
     </div>

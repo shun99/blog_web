@@ -1,13 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '@/components/Home';
-import Android from '@/components/Android';
-import Web from '@/components/Web';
-import Node from '@/components/Node';
+import Sort from '@/components/Sort';
 import Article from '@/components/Article';
 import About from '@/components/About';
 import Editor from '@/components/Editor';
 import Tag from '@/components/Tag';
+import Archive from '@/components/Archive';
 
 Vue.use(Router);
 
@@ -22,16 +21,8 @@ export default new Router({
       component: Home
     },
     {
-      path: '/Android',
-      component: Android
-    },
-    {
-      path: '/Web',
-      component: Web
-    },
-    {
-      path: '/Node',
-      component: Node
+      path: '/sort',
+      component: Sort
     },
     {
       path: '/article/new',
@@ -52,6 +43,10 @@ export default new Router({
     {
       path: '/tag',
       component: Tag
+    },
+    {
+      path: '/archive',
+      component: Archive
     }
   ]
 });

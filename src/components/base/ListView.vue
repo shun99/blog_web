@@ -7,9 +7,8 @@
         </div>
         <div class="content-wrapper">
           <markdown class="app-content-1" :content="item.des"></markdown>
-          <!--<p class="app-content-1">{{item.des}}</p>-->
         </div>
-        <div class="time-wrapper"><span class="time-1">2016.10.21</span></div>
+        <div class="time-wrapper"><span class="time-1">{{getTime(item.updatedAt)}}</span></div>
       </li>
     </ul>
     <div class="page-wrapper">
@@ -26,6 +25,8 @@
 
 <script type="text/ecmascript-6">
   import markdown from './MDView.vue';
+  import * as Utils from '../../utils/timeUtils';
+
   export default {
     data () {
       return {
@@ -64,6 +65,9 @@
               this.itemList.push(rating);
             });
           });
+      },
+      getTime (data) {
+        return Utils.getYear(data) + Utils.getMouthAndDay(data);
       }
     },
     computed: {

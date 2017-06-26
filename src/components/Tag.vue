@@ -2,18 +2,28 @@
   <div class="tag-vue">
     <div class="app-title-1">标签</div>
     <div class="tag-wrapper">
-      <span class="tag" v-for="(tag, index) in tagList">{{tag.des}}</span>
+      <span class="tag" v-for="(tag, index) in tagList">{{tag.name}}</span>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import {tagList} from '../app/constant';
+  import api from '../app/api';
   export default {
     data () {
       return {
-        tagList: tagList
+        tagList: ''
       };
+    },
+    created () {
+      this.getSort();
+    },
+    methods: {
+      getSort () {
+        this.$http.get(api.sort).then(response => {
+          this.tagList = response.body.data;
+        });
+      }
     }
   };
 </script>

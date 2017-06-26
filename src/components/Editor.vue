@@ -50,6 +50,7 @@
       submitData () {
         if (!this.$store.getters.isLogin) {
           utils.toast('未登入');
+          utils.loginStatus(true);
           return;
         }
         if (this.verifyFormData()) {

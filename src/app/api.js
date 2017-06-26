@@ -3,13 +3,15 @@
  * api 接口
  */
 
-let baseUrl = 'http://www.yghysdr.cn/api/';
-// let baseUrl = 'http://192.168.11.148:3000/api/';
+// let baseUrl = 'http://www.yghysdr.cn/api/';
+let baseUrl = 'http://127.0.0.1:3000/api/';
 let login = baseUrl + 'login';
 let article = baseUrl + 'article';
 let list = baseUrl + 'list?type=';
 let avatar = baseUrl + 'avatar';
 let articlePic = baseUrl + 'article_pic';
+let sort = baseUrl + 'sort';
+let archive = baseUrl + 'archive';
 
 module.exports = {
   login: login,
@@ -22,5 +24,7 @@ module.exports = {
   node: list + '2',
   web: list + '3',
   life: list + '100',
-  avatar_upload: avatar
+  avatar_upload: avatar,
+  sort: sort,
+  archive: archive
 };

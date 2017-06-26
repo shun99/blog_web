@@ -4,14 +4,12 @@
       <span class="app-btn-1" @click="insertPic()">插入图片</span>
       <input class="input-none" type="file" ref="inputPic" @change="uploadPic"/>
     </div>
-    <!--<textarea class="item title" placeholder="标题" type="title" v-model="formData.title"></textarea>-->
-    <!--<textarea class="item des" placeholder="描述" v-model="formData.des"></textarea>-->
     <textarea class="item content" placeholder="文章" v-model="formData.content"></textarea>
     <div class="sort-wrapper">
       <span class="sort-title">标签:</span>
-      <span class="sort-content" v-for="(tag, index) in tagList"
-            :class="{'checked-sort': tag.type === formData.articleType}"
-            @click="goCheckItem(tag.type)">{{tag.des}}</span>
+      <span class="sort-content" v-for="(sort, index) in sorts"
+            :class="{'checked-sort': sort.id === formData.type}"
+            @click="goCheckItem(sort.id)">{{sort.name}}</span>
     </div>
     <button class="button" @click="submitData()">提交</button>
   </div>
@@ -20,21 +18,24 @@
 <script type="text/ecmascript-6">
   import api from '../app/api';
   import * as utils from '../utils/index';
-  import {tagList} from '../app/constant';
 
   export default {
     watch: {
       '$route' (to, from) {
         this.initData();
+        this.initSort();
       }
     },
     created () {
       this.initData();
+      this.initSort();
     },
     data () {
       return {
-        formData: {},
-        tagList: tagList
+        formData: {
+          type: 0
+        },
+        sorts: []
       };
     },
     methods: {
@@ -44,8 +45,15 @@
             this.formData = this.$store.getters.getEditArticle;
           });
         } else if (this.$route.fullPath === '/article/new') {
-          this.formData = {};
+          this.formData = {
+            type: 0
+          };
         }
+      },
+      initSort () {
+        this.$http.get(api.sort).then(response => {
+          this.sorts = response.body.data;
+        });
       },
       submitData () {
         if (!this.$store.getters.isLogin) {
@@ -65,7 +73,7 @@
         this.$http
           .post(api.article_post, this.formData, {
             headers: {
-              uid: this.$store.getters.isLogin.uid,
+              uid: this.$store.getters.isLogin.uid + '',
               token: this.$store.getters.isLogin.token
             }
           })
@@ -85,7 +93,7 @@
         this.$http
           .put(api.article_put, this.formData, {
             headers: {
-              uid: this.$store.getters.isLogin.uid,
+              uid: this.$store.getters.isLogin.uid + '',
               token: this.$store.getters.isLogin.token
             }
           })
@@ -102,7 +110,7 @@
           });
       },
       goCheckItem (index) {
-        this.formData.articleType = index;
+        this.formData.type = index;
       },
       verifyFormData () {
         if (!this.formData.content) {

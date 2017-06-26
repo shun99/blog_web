@@ -11,6 +11,7 @@ let list = baseUrl + 'list?type=';
 let avatar = baseUrl + 'avatar';
 let articlePic = baseUrl + 'article_pic';
 let sort = baseUrl + 'sort';
+let sortData = baseUrl + 'sortData';
 let archive = baseUrl + 'archive';
 
 module.exports = {
@@ -26,5 +27,6 @@ module.exports = {
   life: list + '100',
   avatar_upload: avatar,
   sort: sort,
+  sortData: sortData,
   archive: archive
 };

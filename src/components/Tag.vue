@@ -2,7 +2,7 @@
   <div class="tag-vue">
     <div class="app-title-1">标签</div>
     <div class="tag-wrapper">
-      <span class="tag" v-for="(tag, index) in tagList">{{tag.name}}</span>
+      <span class="tag" v-for="(tag, index) in tagList">{{getSortDes(tag)}}</span>
     </div>
   </div>
 </template>
@@ -20,9 +20,12 @@
     },
     methods: {
       getSort () {
-        this.$http.get(api.sort).then(response => {
+        this.$http.get(api.sortData).then(response => {
           this.tagList = response.body.data;
         });
+      },
+      getSortDes (sort) {
+        return sort.name + '(' + sort.count + ')';
       }
     }
   };

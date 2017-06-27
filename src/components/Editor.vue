@@ -8,10 +8,10 @@
     <div class="sort-wrapper">
       <span class="sort-title">标签:</span>
       <label v-for="(sort, index) in sorts" class="sort-wrapper" :for="sort.id">
-        <input type="checkbox" :id="sort.id" :value="sort.id" v-model="selected">
+        <input type="checkbox" :id="sort.id" :value="sort.id" v-model="formData.type">
         {{sort.name}}
       </label>
-      <span class="sort-content">{{selected}}</span>
+      <!--<span class="sort-content">{{formData.type}}</span>-->
     </div>
     <button class="button" @click="submitData()">提交</button>
   </div>
@@ -38,7 +38,6 @@
           type: []
         },
         selected: [],
-        dom: [],
         sorts: []
       };
     },
@@ -50,7 +49,7 @@
           });
         } else if (this.$route.fullPath === '/article/new') {
           this.formData = {
-            type: 0
+            type: [0]
           };
         }
       },

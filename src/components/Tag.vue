@@ -3,6 +3,7 @@
     <div class="app-title-1">标签</div>
     <div class="tag-wrapper">
       <router-link class="tag" v-for="(tag, index) in tagList"
+                   :key="index"
                    :to="'/sort/' + tag.id">
         {{getSortDes(tag)}}
       </router-link>
@@ -15,7 +16,7 @@
   export default {
     data () {
       return {
-        tagList: ''
+        tagList: []
       };
     },
     created () {

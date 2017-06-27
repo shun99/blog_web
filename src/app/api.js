@@ -13,6 +13,7 @@ let articlePic = baseUrl + 'article_pic';
 let sort = baseUrl + 'sort';
 let sortData = baseUrl + 'sortData';
 let archive = baseUrl + 'archive';
+let about = baseUrl + 'article?id=0';
 
 module.exports = {
   login: login,
@@ -25,5 +26,6 @@ module.exports = {
   avatar_upload: avatar,
   sort: sort,
   sortData: sortData,
-  archive: archive
+  archive: archive,
+  about: about
 };

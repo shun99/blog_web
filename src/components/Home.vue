@@ -1,5 +1,5 @@
 <template>
-  <home :api="home"></home>
+  <home ref="child"></home>
 </template>
 
 
@@ -12,6 +12,12 @@
       return {
         home: api.home
       };
+    },
+    created () {
+      this.$nextTick(() => {
+        let child = this.$refs.child;
+        child.initData(api.home);
+      });
     },
     components: {
       home: ListView

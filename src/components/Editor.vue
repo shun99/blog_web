@@ -24,8 +24,10 @@
   export default {
     watch: {
       '$route' (to, from) {
-        this.initData();
-        this.initSort();
+        if (to.path.indexOf('/article/update') !== -1) {
+          this.initData();
+          this.initSort();
+        }
       }
     },
     created () {

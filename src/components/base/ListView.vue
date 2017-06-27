@@ -12,9 +12,6 @@
       </li>
     </ul>
     <div class="page-wrapper">
-      <!--<div class="page-control"><span>上一页</span></div>-->
-      <!--<div class="page-control"><span>博客归档</span></div>-->
-      <!--<div class="page-control"><span>下一页</span></div>-->
       <div class="page-control">
         <span v-if="showMore" @click="loadData()">加载更多</span>
         <span v-else>已经到底部</span>
@@ -31,27 +28,29 @@
     data () {
       return {
         itemList: [],
-        loadMoreHeight: 0,
-        scrollY: 0,
         listData: {
           loading: false,
           curPage: 1,
           haveMore: true,
           pageSize: 10
-        }
+        },
+        api: ''
       };
     },
-    props: {
-      api: ''
-    },
-    created () {
-      this.listData.loading = false;
-      this.listData.curPage = 1;
-      this.listData.haveMore = true;
-      this.loadData();
-    },
     methods: {
+      initData (url) {
+        this.api = url;
+        this.itemList = [];
+        this.listData = {
+          loading: false,
+          curPage: 1,
+          haveMore: true,
+          pageSize: 10
+        };
+        this.loadData();
+      },
       loadData () {
+        console.log('load...' + this.api);
         if (!this.listData.haveMore || this.listData.loading) {
           return;
         }

@@ -21,7 +21,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/sort',
+      path: '/sort/:type',
       component: Sort
     },
     {

@@ -2,7 +2,10 @@
   <div class="tag-vue">
     <div class="app-title-1">标签</div>
     <div class="tag-wrapper">
-      <span class="tag" v-for="(tag, index) in tagList">{{getSortDes(tag)}}</span>
+      <router-link class="tag" v-for="(tag, index) in tagList"
+                   :to="'/sort/' + tag.id">
+        {{getSortDes(tag)}}
+      </router-link>
     </div>
   </div>
 </template>

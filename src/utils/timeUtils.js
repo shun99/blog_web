@@ -9,5 +9,5 @@ export function getYear(data) {
 
 export function getMouthAndDay(data) {
   var date = new Date(data);
-  return date.getMonth() + 1 + '月' + date.getDay() + '日';
+  return date.getMonth() + 1 + '月' + date.getDate() + '日';
 }

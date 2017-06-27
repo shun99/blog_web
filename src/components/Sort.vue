@@ -1,19 +1,34 @@
 <template>
-  <web :api="api"></web>
+  <listView ref="child"></listView>
 </template>
 
 
 <script type="text/ecmascript-6">
   import ListView from '@/components/base/ListView';
+  import api from '../app/api';
 
   export default {
     data () {
       return {
-        api: '/api/ratings'
+        sort: api.list
       };
     },
     components: {
-      web: ListView
+      listView: ListView
+    },
+    created () {
+      this.$nextTick(() => {
+        let child = this.$refs.child;
+        child.initData(api.list + this.$route.params.type);
+      });
+    },
+    watch: {
+      '$route' (to, from) {
+        if (to.path.indexOf('/sort') !== -1) {
+          let child = this.$refs.child;
+          child.initData(api.list + this.$route.params.type);
+        }
+      }
     }
   };
 </script>

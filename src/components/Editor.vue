@@ -7,9 +7,11 @@
     <textarea class="item content" placeholder="文章" v-model="formData.content"></textarea>
     <div class="sort-wrapper">
       <span class="sort-title">标签:</span>
-      <span class="sort-content" v-for="(sort, index) in sorts"
-            :class="{'checked-sort': sort.id === formData.type}"
-            @click="goCheckItem(sort.id)">{{sort.name}}</span>
+      <label v-for="(sort, index) in sorts" class="sort-wrapper" :for="sort.id">
+        <input type="checkbox" :id="sort.id" :value="sort.id" v-model="selected">
+        {{sort.name}}
+      </label>
+      <span class="sort-content">{{selected}}</span>
     </div>
     <button class="button" @click="submitData()">提交</button>
   </div>
@@ -33,8 +35,10 @@
     data () {
       return {
         formData: {
-          type: 0
+          type: []
         },
+        selected: [],
+        dom: [],
         sorts: []
       };
     },
@@ -204,17 +208,17 @@
       .sort-title
         color #222
         font-size: 12px
-      .sort-content
-        font-size: 12px
+      .sort-wrapper
         margin-left: 10px
-        padding 1px 5px
-        color #909090
-        background #fff
-        border: 1px solid #f1f1f1
-      .checked-sort
-        background color_primary
-        border none
-        color #fff
+        .sort-content
+          font-size: 12px
+          padding 1px 5px
+          color #909090
+          border: 1px solid #f1f1f1
+        .checked-sort
+          background color_primary
+          border none
+          color #fff
     .button
       width: 100%
       max-width: 300px

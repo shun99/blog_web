@@ -39,9 +39,7 @@
     padding 10px
     overflow: auto
     .bot
-      position: fixed
-      left: 250px
-      z-index 1px
+      margin-top 20px
       background #ffffff
       bottom: 0px
       right: 0px

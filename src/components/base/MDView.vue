@@ -50,8 +50,8 @@
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../assets/css/github-markdown.css";
   @import "../../assets/css/atom-one-dark.min.css";
-  .markdown-vue
-    width: 100%
-    height: 100%
+  li {
+    list-style disc
+  }
 
 </style>

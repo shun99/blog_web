@@ -3,11 +3,10 @@
     <span class="border-1px"></span>
     <p>
       <span class="app-content-1">©2017-一个很严肃的人-</span>
-      <a class="app-a" href="">博客源码</a>
+      <a class="app-a" href="https://github.com/shun99/blog-server" target="view_window">博客源码</a>
     </p>
     <p class="content">
-      <span class="app-content-1">Powered by </span> <a class="app-a">Vue2</a>
-      <span>&</span><a class="app-a"> Koa2</a>
+      <span class="app-content-2">备案号：</span> <a class="app-a-1">京ICP备17009777号</a>
     </p>
   </div>
 </template>

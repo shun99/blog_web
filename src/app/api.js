@@ -3,8 +3,8 @@
  * api 接口
  */
 
-// let baseUrl = 'http://www.yghysdr.cn/api/';
-let baseUrl = 'http://127.0.0.1:3000/api/';
+let baseUrl = 'http://www.yghysdr.cn/api/';
+// let baseUrl = 'http://127.0.0.1:3000/api/';
 let login = baseUrl + 'login';
 let article = baseUrl + 'article';
 let list = baseUrl + 'list?type=';

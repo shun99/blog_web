@@ -2,6 +2,14 @@
 
 > 个人博客
 
+# V1.0
+
+- 框架 vue vuex vue-router vue-resource
+- 页面结构 SPA
+- md文件解析 marked
+
+# 开发过程
+
 ## 用vue-cli搭建框架
 
 ``` bash
@@ -17,13 +25,10 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
-# 引入框架
-- ui museui
-- css normalize
 
 > 需要全局引入的时候放在main.js 打包，main.js是webpack打包的入口。
 
-# 搭建主页
+## 搭建主页
 - 引入stylus
 - 搭建主页
 
@@ -32,8 +37,8 @@ npm run build --report
           content="width=device-width,initial-scale=1.0,
         maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
 ```
-# 引入Markdown
-## marked.js前段展示
+## 引入Markdown
+marked.js前段展示
 ```
 //html
 <div v-html="compiledMarkdown"></div>
@@ -67,17 +72,17 @@ apiRoutes.get('/makedown', function (req, res) {
   });
 })
 ```
-# 重构首页
+## 重构首页
 - 提取toolbar
 - 引入better-scroll
 
-# 列表页加载更多
+## 列表页加载更多
 > 计算当数据的高度，监听BScroll的滚动，当滚动到合适位置加载更多。
 
-# 点击条目
+## 点击条目
 传递整个点击的条目信息
 
-# SPA问题
+## SPA问题
 - 动态绑定router-link
 ```
 <router-link class="title-1" :to="'/article/' + index">百度{{index}}</router-link>
@@ -85,7 +90,7 @@ apiRoutes.get('/makedown', function (req, res) {
 - 前进返回
 默认的vue-router会自动处理
 
-# 动态路由匹配组件复用问题
+## 动态路由匹配组件复用问题
 当使用路由参数时，例如从 /user/foo 导航到 user/bar，原来的组件实例会被复用。因为两个路由都渲染同个组件，比起销毁再创建，复用则显得更加高效。不过，这也意味着组件的生命周期钩子不会再被调用。
 复用组件时，想对路由参数的变化作出响应的话，你可以简单地 watch（监测变化） $route 对象：
 当时当从/user/foo进入user/bar，从新刷新页面可以可以，当时当从user/bar退回/user/foo不能恢复之前的/user/foo
@@ -98,15 +103,15 @@ apiRoutes.get('/makedown', function (req, res) {
   ]
 //
 ```
-# 文章编辑
+## 文章编辑
 
-# 文章的读写流程
+## 文章的读写流程
 
-# 文章编辑
+## 文章编辑
 类型选择
-# 文章详情bug
+## 文章详情bug
 
-# 去除第三方UI框架
+## 去除第三方UI框架
 
 |名称|z-index|
 |---|----|
@@ -114,12 +119,12 @@ apiRoutes.get('/makedown', function (req, res) {
 |content|0|
 |slider|101|
 
-# 调整结构
-# fix bug
+## 调整结构
+## fix bug
 修复markdown左右不滚动
 去掉父布局的auto
-# 登入弹窗
-# OAuth认证
+## 登入弹窗
+## OAuth认证
 ## 表单提交 与 json提交
 原始数据
 ```
@@ -261,7 +266,7 @@ export let StorageKey = {
 ```
 - 从change的事件中的target获取files。
 - reader.onload 的参数从读取到图片转码后的base64字符串
-# 上传图片
+## 上传图片
 - 使用图片的base64
 - 校验用户身份
-# 加入侧边栏
+## 加入侧边栏

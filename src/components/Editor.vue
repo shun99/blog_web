@@ -3,6 +3,9 @@
     <div class="pic-pos">
       <span class="app-btn-1" @click="insertPic()">插入图片</span>
       <input class="input-none" type="file" ref="inputPic" @change="uploadPic"/>
+      <span class="app-btn-1" @click="insertTitle()">标题</span>
+      <span class="app-btn-1" @click="insertDes()">描述</span>
+      <span class="app-btn-1" @click="insertContent()">内容</span>
     </div>
     <textarea class="item content" placeholder="文章" v-model="formData.content"></textarea>
     <div class="sort-wrapper">
@@ -153,7 +156,7 @@
           pic.append('file', e.target.files[0]);
           this.$http.post(api.article_pic_post, pic, {
             headers: {
-              uid: this.$store.getters.isLogin.uid,
+              uid: this.$store.getters.isLogin.uid + '',
               token: this.$store.getters.isLogin.token
             }
           }).then((response) => {
@@ -166,6 +169,27 @@
             }
           });
         }
+      },
+      insertTitle () {
+        let conTemp = 'title:';
+        if (this.formData.content) {
+          conTemp = this.formData.content + '\n' + conTemp;
+        }
+        this.$set(this.formData, 'content', conTemp);
+      },
+      insertDes () {
+        let conTemp = 'des:>';
+        if (this.formData.content) {
+          conTemp = this.formData.content + '\n' + conTemp;
+        }
+        this.$set(this.formData, 'content', conTemp);
+      },
+      insertContent () {
+        let conTemp = 'content:';
+        if (this.formData.content) {
+          conTemp = this.formData.content + '\n' + conTemp;
+        }
+        this.$set(this.formData, 'content', conTemp);
       }
     }
   };

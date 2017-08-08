@@ -9,7 +9,7 @@ export function getYear(data) {
 
 export function getYearAndMouth(data) {
   var date = new Date(data);
-  return date.getFullYear() + '年' + date.getMonth() + 1 + '月';
+  return date.getFullYear() + '年' + (date.getMonth() + 1) + '月';
 }
 
 export function getMouthAndDay(data) {

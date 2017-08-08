@@ -2,11 +2,11 @@
   <div class="archive-wrapper">
     <div class="title">归档</div>
     <div v-for="(archive, index) in archiveList" class="item_wrapper">
-      <div class="mouth">{{getYear(archive.year)}}</div>
+      <div class="mouth">{{getYearAndMouth(archive.timestamp)}}</div>
       <li v-for="(article, index) in archive.articleList" class="article">
         <router-link class="title" :to="'/article/' + article.id">{{article.title}}</router-link>
         <!--<span class="title">{{article.title}}</span>-->
-        <span class="time">{{getMouthAndDay(article.createdAt)}}</span>
+        <span class="time">{{getDay(article.createdAt)}}</span>
       </li>
     </div>
   </div>
@@ -30,11 +30,11 @@
           this.archiveList = response.body.data;
         });
       },
-      getYear (data) {
-        return Utils.getYear(data);
+      getYearAndMouth (data) {
+        return Utils.getYearAndMouth(data);
       },
-      getMouthAndDay (data) {
-        return Utils.getMouthAndDay(data);
+      getDay (data) {
+        return Utils.getDay(data);
       }
     }
   };
